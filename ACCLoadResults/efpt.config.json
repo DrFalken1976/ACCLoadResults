@@ -1,0 +1,103 @@
+﻿{
+   "CodeGenerationMode": 3,
+   "ContextClassName": "DataContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "ACCLoadResults",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Cars]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Laps]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LeaderBoard]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[penalties]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SeasonPointsDefinition]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Seasons]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SeasonSessions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sessions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TypeRace]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TypeSessions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[vGetCompleteSessions]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vSeasonRaceLeaderBoard]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vSessionLaps]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vSessionLeaderBoard]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vSessionPenalties]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vStatsRaceVsQualy]",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": "(localdb)\\MSSQLLocalDB.ACCSessionsData",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
