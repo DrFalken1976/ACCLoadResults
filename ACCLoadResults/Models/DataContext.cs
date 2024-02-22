@@ -23,6 +23,12 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<LeaderBoard> LeaderBoard { get; set; }
 
+    public virtual DbSet<RaceTeams> RaceTeams { get; set; }
+
+    public virtual DbSet<SeasonCalendar> SeasonCalendar { get; set; }
+
+    public virtual DbSet<SeasonClassification> SeasonClassification { get; set; }
+
     public virtual DbSet<SeasonPointsDefinition> SeasonPointsDefinition { get; set; }
 
     public virtual DbSet<SeasonSessions> SeasonSessions { get; set; }
@@ -30,6 +36,10 @@ public partial class DataContext : DbContext
     public virtual DbSet<Seasons> Seasons { get; set; }
 
     public virtual DbSet<Sessions> Sessions { get; set; }
+
+    public virtual DbSet<TeamsByRace> TeamsByRace { get; set; }
+
+    public virtual DbSet<Tracks> Tracks { get; set; }
 
     public virtual DbSet<TypeRace> TypeRace { get; set; }
 
@@ -145,6 +155,44 @@ public partial class DataContext : DbContext
                 .IsFixedLength();
         });
 
+        modelBuilder.Entity<RaceTeams>(entity =>
+        {
+            entity.Property(e => e.ID)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.Date).HasColumnType("date");
+            entity.Property(e => e.RaceName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsFixedLength();
+        });
+
+        modelBuilder.Entity<SeasonCalendar>(entity =>
+        {
+            entity.Property(e => e.ID)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.Date).HasColumnType("date");
+            entity.Property(e => e.IdSeason).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.IdTrack).HasColumnType("numeric(18, 0)");
+        });
+
+        modelBuilder.Entity<SeasonClassification>(entity =>
+        {
+            entity.HasIndex(e => new { e.IDSeason, e.IDSession, e.IDCalendar, e.NickName, e.Position }, "IX_SeasonClassification").IsUnique();
+
+            entity.Property(e => e.ID)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.IDCalendar).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.IDSeason).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.IDSession).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.NickName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsFixedLength();
+        });
+
         modelBuilder.Entity<SeasonPointsDefinition>(entity =>
         {
             entity.HasKey(e => new { e.IDSeason, e.RaceType, e.Position, e.Points });
@@ -217,6 +265,33 @@ public partial class DataContext : DbContext
                 .HasMaxLength(150);
         });
 
+        modelBuilder.Entity<TeamsByRace>(entity =>
+        {
+            entity.Property(e => e.ID)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.GameTag)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.GameTagUID)
+                .IsRequired()
+                .HasMaxLength(100);
+            entity.Property(e => e.IDRace).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.TeamName)
+                .IsRequired()
+                .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<Tracks>(entity =>
+        {
+            entity.Property(e => e.ID)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.TrackName)
+                .IsRequired()
+                .HasMaxLength(100);
+        });
+
         modelBuilder.Entity<TypeRace>(entity =>
         {
             entity.Property(e => e.Name)
@@ -258,19 +333,19 @@ public partial class DataContext : DbContext
             entity.Property(e => e.BestLap)
                 .IsRequired()
                 .HasMaxLength(20);
-            entity.Property(e => e.BestLapNumeric).HasColumnType("numeric(8, 0)");
+            entity.Property(e => e.BestLapNumeric).HasColumnType("numeric(10, 0)");
             entity.Property(e => e.BestSector1)
                 .IsRequired()
                 .HasMaxLength(20);
-            entity.Property(e => e.BestSector1Numeric).HasColumnType("numeric(8, 0)");
+            entity.Property(e => e.BestSector1Numeric).HasColumnType("numeric(10, 0)");
             entity.Property(e => e.BestSector2)
                 .IsRequired()
                 .HasMaxLength(20);
-            entity.Property(e => e.BestSector2Numeric).HasColumnType("numeric(8, 0)");
+            entity.Property(e => e.BestSector2Numeric).HasColumnType("numeric(10, 0)");
             entity.Property(e => e.BestSector3)
                 .IsRequired()
                 .HasMaxLength(20);
-            entity.Property(e => e.BestSector3Numeric).HasColumnType("numeric(8, 0)");
+            entity.Property(e => e.BestSector3Numeric).HasColumnType("numeric(10, 0)");
             entity.Property(e => e.CompleteRace).HasMaxLength(163);
             entity.Property(e => e.ID)
                 .ValueGeneratedOnAdd()
@@ -524,7 +599,7 @@ public partial class DataContext : DbContext
                 .ToView("vStatsRaceVsQualy");
 
             entity.Property(e => e.CarModel).HasMaxLength(107);
-            entity.Property(e => e.Diff).HasColumnType("numeric(19, 0)");
+            entity.Property(e => e.Diff).HasColumnType("numeric(15, 0)");
             entity.Property(e => e.HotLapPlayerRace)
                 .HasMaxLength(20)
                 .IsFixedLength();

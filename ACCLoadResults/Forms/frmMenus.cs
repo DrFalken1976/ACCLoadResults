@@ -31,5 +31,14 @@
             oForm.ShowDialog();
 
         }
+
+        private void btnCreateTeams_Click(object sender, EventArgs e)
+        {
+
+            frmCreateTeams oForm = new frmCreateTeams();
+            oForm.ShowDialog();
+
+        }
+
     }
 }

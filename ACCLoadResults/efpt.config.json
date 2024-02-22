@@ -32,6 +32,18 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[RaceTeams]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SeasonCalendar]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SeasonClassification]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[SeasonPointsDefinition]",
          "ObjectType": 0
       },
@@ -45,6 +57,14 @@
       },
       {
          "Name": "[dbo].[Sessions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TeamsByRace]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Tracks]",
          "ObjectType": 0
       },
       {
@@ -93,6 +113,7 @@
    "UseLegacyPluralizer": false,
    "UseManyToManyEntity": false,
    "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
    "UseNoObjectFilter": false,
    "UseNodaTime": false,
    "UseNullableReferences": false,

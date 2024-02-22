@@ -9,6 +9,46 @@ namespace ACCLoadResults.Classes
         public const string RacevsQualyHidenFields = "TrackName, CarModel, IDSession, IDQualySession, SessionDate, RaceMeteorology, HotLapRace, PolePosition";
         public const string PenaltiesHidenFields = "IDSession";
 
+        public const string EntriesINITEntries = @"
+        {
+            ""entries"": 
+            [
+                {0}
+            ],
+            ""configVersion"": 1
+        }";
+
+
+        public const string EntriesINITDriver = @"
+                {
+                    ""firstName"": ""{0}"",
+                    ""lastName"": ""{1}"",
+                    ""shortName"": ""{2}"",
+                    ""driverCategory"": {3},
+                    ""playerID"": ""{4}""
+                }";
+
+
+        public const string EntriesAddTeam = @"
+            {   
+                ""drivers"": 
+                [
+                    [0]
+                ],
+                ""customCar"": """",
+                ""raceNumber"": 1,
+                ""forcedCarModel"": -1,
+                ""overrideDriverInfo"": 1,
+                ""isServerAdmin"": 1,
+                ""configVersion"": 0
+            }";
+
+        public const string EventRules = @",
+                                          ""driverStintTimeSec"": {0},
+                                          ""maxTotalDrivingTime"": {1},
+                                          ""maxDriversCount"": {2}";
+
+
         /// <summary>
         /// Transform ACC Time format to M/S/Mil
         /// </summary>
