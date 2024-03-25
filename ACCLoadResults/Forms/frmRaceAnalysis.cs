@@ -569,7 +569,10 @@ namespace ACCLoadResults.Forms
                             if (cell.Name != "DiffPosition")
 
                                 if (cell.Name != "Diff")
-                                    htmlPart += "<td style='text-align: center; color: white;width:120px;border: 0px solid #ccc;" + strHidenTD + "'>" + cell.GetValue(row).ToString().Trim() + "</td>" + Environment.NewLine;
+                                    if (cell.GetValue(row).ToString().Trim().Length > 10 && cell.Name != "NickName")
+                                        htmlPart += "<td style='text-align: center; color: white;width:120px;border: 0px solid #ccc;" + strHidenTD + "'>0:00.000</td>" + Environment.NewLine;
+                                    else
+                                        htmlPart += "<td style='text-align: center; color: white;width:120px;border: 0px solid #ccc;" + strHidenTD + "'>" + cell.GetValue(row).ToString().Trim() + "</td>" + Environment.NewLine;
                                 else
                                     htmlPart += "<td style='text-align: center; color: white;width:120px;border: 0px solid #ccc;" + strHidenTD + "'>" + Globals.formatTime(long.Parse(cell.GetValue(row).ToString())) + "</td>" + Environment.NewLine;
                             else
@@ -687,9 +690,15 @@ namespace ACCLoadResults.Forms
                     
                     //Get IDQualy
                     decimal? lngIDQualy = (from Datos in Globals.oData.vSessionLaps where Datos.IDSession == decimal.Parse(_IDSession) && Datos.NickName.Trim() == Pilot select Datos.IDQualySession).ToList().First();
-                    
+
                     //Get Initial possition
-                    long PosInitialPilot = (from Datos in Globals.oData.LeaderBoard where Datos.IDSession == lngIDQualy && Datos.lastName.Trim() == Pilot select Datos.Position).ToList().First();
+                    var qryInitPos = (from Datos in Globals.oData.LeaderBoard where Datos.IDSession == lngIDQualy && Datos.lastName.Trim() == Pilot select Datos.Position);
+
+                    //Default 99 (control No Qualy Challenge)
+                    long PosInitialPilot = Pilots.Count();
+
+                    if (qryInitPos.Any())
+                        PosInitialPilot = (from Datos in Globals.oData.LeaderBoard where Datos.IDSession == lngIDQualy && Datos.lastName.Trim() == Pilot select Datos.Position).ToList().First();
 
                     //If any qualy
                     if (lngIDQualy != null)
