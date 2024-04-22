@@ -2,3 +2,6 @@
 
 # IDE0002: Simplificar acceso de miembros
 dotnet_diagnostic.IDE0002.severity = silent
+
+# CS8602: Desreferencia de una referencia posiblemente NULL.
+dotnet_diagnostic.CS8602.severity = none
