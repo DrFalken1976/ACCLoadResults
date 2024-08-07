@@ -10,4 +10,8 @@ public partial class Tracks
     public decimal ID { get; set; }
 
     public string TrackName { get; set; }
+
+    public string Lat { get; set; }
+
+    public string Lon { get; set; }
 }

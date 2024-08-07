@@ -45,6 +45,8 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<TypeSessions> TypeSessions { get; set; }
 
+    public virtual DbSet<TypeWeather> TypeWeather { get; set; }
+
     public virtual DbSet<penalties> penalties { get; set; }
 
     public virtual DbSet<vGetCompleteSessions> vGetCompleteSessions { get; set; }
@@ -287,6 +289,8 @@ public partial class DataContext : DbContext
             entity.Property(e => e.ID)
                 .ValueGeneratedOnAdd()
                 .HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.Lat).HasMaxLength(75);
+            entity.Property(e => e.Lon).HasMaxLength(75);
             entity.Property(e => e.TrackName)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -308,6 +312,18 @@ public partial class DataContext : DbContext
             entity.Property(e => e.Session)
                 .IsRequired()
                 .HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<TypeWeather>(entity =>
+        {
+            entity.Property(e => e.ACCValue)
+                .IsRequired()
+                .HasMaxLength(3)
+                .IsFixedLength();
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsFixedLength();
         });
 
         modelBuilder.Entity<penalties>(entity =>

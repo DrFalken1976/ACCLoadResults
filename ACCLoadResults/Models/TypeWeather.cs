@@ -5,11 +5,13 @@ using System.Collections.Generic;
 
 namespace ACCLoadResults.Models;
 
-public partial class RaceTeams
+public partial class TypeWeather
 {
-    public decimal ID { get; set; }
+    public int Id { get; set; }
 
-    public string RaceName { get; set; }
+    public string Name { get; set; }
 
-    public DateTime Date { get; set; }
+    public int Value { get; set; }
+
+    public string ACCValue { get; set; }
 }

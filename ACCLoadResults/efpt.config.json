@@ -2,7 +2,6 @@
    "CodeGenerationMode": 3,
    "ContextClassName": "DataContext",
    "ContextNamespace": null,
-   "DefaultDacpacSchema": null,
    "FilterSchemas": false,
    "IncludeConnectionString": true,
    "ModelNamespace": null,
@@ -76,6 +75,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[TypeWeather]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[vGetCompleteSessions]",
          "ObjectType": 3
       },
@@ -100,12 +103,14 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "(localdb)\\MSSQLLocalDB.ACCSessionsData",
+   "UiHint": null,
    "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDateOnlyTimeOnly": false,
    "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
    "UseHierarchyId": false,
@@ -117,6 +122,7 @@
    "UseNoObjectFilter": false,
    "UseNodaTime": false,
    "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
    "UseSchemaFolders": false,
    "UseSchemaNamespaces": false,
    "UseSpatial": false,

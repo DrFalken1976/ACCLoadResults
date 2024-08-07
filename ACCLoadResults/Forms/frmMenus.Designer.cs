@@ -34,6 +34,7 @@
             btnLoadData = new Button();
             groupBox2 = new GroupBox();
             btnCreateTeams = new Button();
+            button1 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -82,6 +83,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(button1);
             groupBox2.Controls.Add(btnCreateTeams);
             groupBox2.Location = new Point(12, 51);
             groupBox2.Name = "groupBox2";
@@ -99,6 +101,16 @@
             btnCreateTeams.Text = "Manage Teams";
             btnCreateTeams.UseVisualStyleBackColor = true;
             btnCreateTeams.Click += btnCreateTeams_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(36, 175);
+            button1.Name = "button1";
+            button1.Size = new Size(212, 66);
+            button1.TabIndex = 5;
+            button1.Text = "Manage Meteo";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // frmMenus
             // 
@@ -123,5 +135,6 @@
         private Button btnLoadData;
         private GroupBox groupBox2;
         private Button btnCreateTeams;
+        private Button button1;
     }
 }

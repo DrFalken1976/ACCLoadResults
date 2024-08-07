@@ -49,6 +49,14 @@ namespace ACCLoadResults.Classes
                                           ""maxDriversCount"": {2}";
 
 
+        public const string Weather = @"
+                                        ""rain"": {0},
+                                        ""cloudLevel"": {1},
+                                        ""ambientTemp"": {2},
+                                        ""weatherRandomness"": 0";
+
+
+
         /// <summary>
         /// Transform ACC Time format to M/S/Mil
         /// </summary>

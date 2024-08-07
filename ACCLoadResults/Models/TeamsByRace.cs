@@ -2,15 +2,11 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ACCLoadResults.Models;
 
 public partial class TeamsByRace
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public decimal ID { get; set; }
 
     public decimal IDRace { get; set; }

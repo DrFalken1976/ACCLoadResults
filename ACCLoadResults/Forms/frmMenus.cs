@@ -40,5 +40,11 @@
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmMeteo oForm = new frmMeteo();
+            oForm.ShowDialog();
+
+        }
     }
 }

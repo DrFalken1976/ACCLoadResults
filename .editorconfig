@@ -5,3 +5,6 @@ dotnet_diagnostic.IDE0002.severity = silent
 
 # CS8602: Desreferencia de una referencia posiblemente NULL.
 dotnet_diagnostic.CS8602.severity = none
+
+# CS0168: La variable está declarada pero nunca se usa
+dotnet_diagnostic.CS0168.severity = none
