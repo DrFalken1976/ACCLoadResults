@@ -53,7 +53,7 @@ namespace ACCLoadResults.Classes
                                         ""rain"": {0},
                                         ""cloudLevel"": {1},
                                         ""ambientTemp"": {2},
-                                        ""weatherRandomness"": 0";
+                                        ""weatherRandomness"": 0,";
 
 
 

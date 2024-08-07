@@ -54,7 +54,13 @@ namespace ACCLoadResults.Forms
                 //Search Rain level
                 List<TypeWeather> oData = (from Data in Globals.oData.TypeWeather where Data.Name == MetoData.current.summary.Trim() select Data).ToList();
 
-                string cloudLevel = "0." + MetoData.current.cloud_cover.ToString().Substring(0, 1);
+                string cloudLevel = "0";
+
+                if (MetoData.current.cloud_cover < 100)
+                    cloudLevel = "0." + MetoData.current.cloud_cover.ToString().Substring(0, 1);
+                else
+                    cloudLevel = "1";
+
                 string Rain = oData[0].ACCValue.Trim();
                 string ambientTemp = MetoData.current.temperature.ToString("##");
 
