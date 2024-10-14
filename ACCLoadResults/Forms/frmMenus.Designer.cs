@@ -35,8 +35,13 @@
             groupBox2 = new GroupBox();
             button1 = new Button();
             btnCreateTeams = new Button();
+            groupBox3 = new GroupBox();
+            button2 = new Button();
+            btnClassificacio = new Button();
+            btnMantSeason = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -112,11 +117,53 @@
             btnCreateTeams.UseVisualStyleBackColor = true;
             btnCreateTeams.Click += btnCreateTeams_Click;
             // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(button2);
+            groupBox3.Controls.Add(btnClassificacio);
+            groupBox3.Controls.Add(btnMantSeason);
+            groupBox3.Location = new Point(638, 51);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(293, 416);
+            groupBox3.TabIndex = 6;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Manage Seasons";
+            // 
+            // button2
+            // 
+            button2.Location = new Point(41, 263);
+            button2.Name = "button2";
+            button2.Size = new Size(212, 69);
+            button2.TabIndex = 5;
+            button2.Text = "Race Analysis";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += btnRaceAna_Click;
+            // 
+            // btnClassificacio
+            // 
+            btnClassificacio.Location = new Point(41, 156);
+            btnClassificacio.Name = "btnClassificacio";
+            btnClassificacio.Size = new Size(212, 69);
+            btnClassificacio.TabIndex = 4;
+            btnClassificacio.Text = "Generate Leaderboard";
+            btnClassificacio.UseVisualStyleBackColor = true;
+            // 
+            // btnMantSeason
+            // 
+            btnMantSeason.Location = new Point(41, 56);
+            btnMantSeason.Name = "btnMantSeason";
+            btnMantSeason.Size = new Size(212, 66);
+            btnMantSeason.TabIndex = 3;
+            btnMantSeason.Text = "Manage Seasons";
+            btnMantSeason.UseVisualStyleBackColor = true;
+            btnMantSeason.Click += btnMantSeason_Click;
+            // 
             // frmMenus
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(640, 487);
+            ClientSize = new Size(962, 487);
+            Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Name = "frmMenus";
@@ -124,6 +171,7 @@
             Text = "frmMenucs";
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -136,5 +184,9 @@
         private GroupBox groupBox2;
         private Button btnCreateTeams;
         private Button button1;
+        private GroupBox groupBox3;
+        private Button button2;
+        private Button btnClassificacio;
+        private Button btnMantSeason;
     }
 }

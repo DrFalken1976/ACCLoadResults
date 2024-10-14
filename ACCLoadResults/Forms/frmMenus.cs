@@ -46,5 +46,12 @@
             oForm.ShowDialog();
 
         }
+
+        private void btnMantSeason_Click(object sender, EventArgs e)
+        {
+            frmMantSeasons oForm = new frmMantSeasons();
+            oForm.ShowDialog();
+        }
+
     }
 }

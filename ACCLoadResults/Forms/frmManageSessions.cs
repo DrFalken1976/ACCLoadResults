@@ -1,4 +1,5 @@
-﻿using ACCLoadResults.Models;
+﻿using ACCLoadResults.Classes;
+using ACCLoadResults.Models;
 using System.Data;
 
 namespace ACCLoadResults.Forms
@@ -14,9 +15,10 @@ namespace ACCLoadResults.Forms
         {
 
             //Load Races without Quali's
-            List<Sessions> oSessions = (from Datos in Classes.Globals.oData.Sessions 
-                                        where Datos.sessionType.Contains("R") && Datos.IDQualySession == null 
-                                        orderby Datos.SessionDate descending, Datos.SessionHour descending select Datos).ToList();
+            List<Sessions> oSessions = (from Datos in Classes.Globals.oData.Sessions
+                                        where Datos.sessionType.Contains("R") && Datos.IDQualySession == null
+                                        orderby Datos.SessionDate descending, Datos.SessionHour descending
+                                        select Datos).ToList();
 
             grdRaces.DataSource = oSessions;
 
@@ -40,7 +42,10 @@ namespace ACCLoadResults.Forms
 
             //Get selected rows for link
             decimal RaceID = (decimal)grdRaces.CurrentRow.Cells["ID"].Value;
-            decimal QualiID = (decimal)grdQualy.CurrentRow.Cells["ID"].Value;
+            decimal QualiID = 0;
+
+            if (grdQualy.CurrentRow != null)
+                QualiID = (decimal)grdQualy.CurrentRow.Cells["ID"].Value;
 
 
             //Update Race with Quali ID Session
@@ -48,11 +53,50 @@ namespace ACCLoadResults.Forms
             Sessions oSession = Classes.Globals.oData.Sessions.Where(F => F.ID == RaceID).Select(f => f).ToArray()[0];
             oSession.IDQualySession = QualiID;
 
+            if (cboLinkRace.SelectedValue != null)
+            {
+                SeasonSessions oLinkSeason = new SeasonSessions();
+                oLinkSeason.IdSession = RaceID;
+                oLinkSeason.IdSeason = (decimal)cboLinkRace.SelectedValue;
+
+                Globals.oData.SeasonSessions.Add(oLinkSeason);
+
+            }
+
             Classes.Globals.oData.SaveChanges();
 
             //Call Load for refresh
             frmManageSessions_Load(sender, e);
 
         }
+
+        private void grdRaces_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            DateTime StartDate = (DateTime)grdRaces.Rows[e.RowIndex].Cells["SessionDate"].Value;
+            StartDate = StartDate.AddDays(-1);
+            DateTime EndDate = (DateTime)grdRaces.Rows[e.RowIndex].Cells["SessionDate"].Value;
+            EndDate = EndDate.AddDays(1);
+
+            var query = from c in Classes.Globals.oData.SeasonCalendar
+                        join s in Classes.Globals.oData.Seasons on c.IdSeason equals s.ID
+                        join t in Classes.Globals.oData.Tracks on c.IdTrack equals t.ID
+                        where s.Active == true && c.Date >= StartDate && c.Date <= EndDate
+                        select new
+                        {
+                            IdSeason = s.ID,
+                            IdRace = c.ID,
+                            c.Date,
+                            TrackName = t.TrackName.Trim() + "(" + s.Name.Trim() + ") " + c.Date.ToString()
+                        };
+
+            cboLinkRace.DataSource = query.ToList();
+            cboLinkRace.ValueMember = "IdRace";
+            cboLinkRace.DisplayMember = "TrackName";
+
+
+        }
+
+
     }
 }

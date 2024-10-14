@@ -15,5 +15,7 @@ public partial class Seasons
 
     public DateTime DateEnd { get; set; }
 
+    public string Category { get; set; }
+
     public bool Active { get; set; }
 }

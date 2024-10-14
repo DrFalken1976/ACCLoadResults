@@ -422,7 +422,7 @@ namespace ACCLoadResults.Forms
 
         bool GenerateHTML_CompareLaps(string IDSession)
         {
-                        
+
             try
             {
 
@@ -562,7 +562,7 @@ namespace ACCLoadResults.Forms
                         if (cell.GetValue(row) == null)
                             continue;
 
-                        if (cell.GetValue(row).ToString().Trim() == HotLap || cell.GetValue(row).ToString().Trim() == PolePosition)
+                        if ((cell.GetValue(row).ToString().Trim() == HotLap) || (cell.GetValue(row).ToString().Trim() == PolePosition && PolePosition != "0:00.000"))
                             htmlPart += "<td style='text-align: center; color: white;background-color: #800080;width:120px;border: 1px solid #ccc;" + strHidenTD + "'>" + cell.GetValue(row).ToString().Trim() + "</td>" + Environment.NewLine;
                         else
                         {
@@ -684,10 +684,10 @@ namespace ACCLoadResults.Forms
                     htmlPart += "  tension: 0.1, " + Environment.NewLine;
 
                     sPilotaDataSets += sPilot + ",";
-                    
+
                     //Get Laps
                     List<long?> PosByLapPilot = (from Datos in Globals.oData.vSessionLaps where Datos.IDSession == decimal.Parse(_IDSession) && Datos.NickName.Trim() == Pilot select Datos.Position).ToList();
-                    
+
                     //Get IDQualy
                     decimal? lngIDQualy = (from Datos in Globals.oData.vSessionLaps where Datos.IDSession == decimal.Parse(_IDSession) && Datos.NickName.Trim() == Pilot select Datos.IDQualySession).ToList().First();
 
@@ -809,9 +809,12 @@ namespace ACCLoadResults.Forms
             grdRaces.DataBindingComplete += grdRaces_DataBindingComplete;
 
             List<vGetCompleteSessions> OStatsR = (from Datos in Globals.oData.vGetCompleteSessions orderby Datos.IDQualySession descending, Datos.ID descending select Datos).ToList();
-
             grdRaces.DataSource = OStatsR;
 
+            List<Seasons> oSeasons = (from Data in Globals.oData.Seasons orderby Data.Active descending select Data).ToList();
+            cboSeason.ValueMember = "ID";
+            cboSeason.DisplayMember = "Name";
+            cboSeason.DataSource = oSeasons;
         }
 
         private void grdRaces_DataBindingComplete(object? sender, DataGridViewBindingCompleteEventArgs e)
@@ -829,6 +832,18 @@ namespace ACCLoadResults.Forms
 
         }
 
+        private void cboSeason_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            List<vGetCompleteSessions> OStatsR = (from Datos in Globals.oData.vGetCompleteSessions join S in Globals.oData.SeasonSessions on
+                                                    Datos.ID equals S.IdSession
+                                                  where S.IdSeason == (Decimal)cboSeason.SelectedValue
+                                                  orderby Datos.IDQualySession descending, Datos.ID descending 
+                                                  select Datos).ToList();
+            grdRaces.DataSource = OStatsR;
+
+
+        }
     }
 }
 

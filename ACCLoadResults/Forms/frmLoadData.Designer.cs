@@ -139,18 +139,18 @@
             // grdAvFiles
             // 
             grdAvFiles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grdAvFiles.Location = new Point(221, 30);
+            grdAvFiles.Location = new Point(41, 27);
             grdAvFiles.Name = "grdAvFiles";
             grdAvFiles.RowTemplate.Height = 25;
             grdAvFiles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grdAvFiles.Size = new Size(607, 227);
+            grdAvFiles.Size = new Size(981, 227);
             grdAvFiles.TabIndex = 3;
             // 
             // frmLoadData
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1058, 522);
+            ClientSize = new Size(1068, 522);
             Controls.Add(grdAvFiles);
             Controls.Add(gbStatus);
             Controls.Add(prgLoad);

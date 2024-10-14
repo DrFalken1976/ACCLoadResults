@@ -37,6 +37,8 @@ public partial class vStatsRaceVsQualy
 
     public int LapsInRace { get; set; }
 
+    public int ValidLaps { get; set; }
+
     public int LapsInQualy { get; set; }
 
     public string TotalTime { get; set; }

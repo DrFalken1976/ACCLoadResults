@@ -31,6 +31,8 @@
             grdRaces = new DataGridView();
             grdQualy = new DataGridView();
             btnLinkQToR = new Button();
+            cboLinkRace = new ComboBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)grdRaces).BeginInit();
             ((System.ComponentModel.ISupportInitialize)grdQualy).BeginInit();
             SuspendLayout();
@@ -45,6 +47,7 @@
             grdRaces.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grdRaces.Size = new Size(1350, 234);
             grdRaces.TabIndex = 0;
+            grdRaces.CellClick += grdRaces_CellClick;
             // 
             // grdQualy
             // 
@@ -67,11 +70,30 @@
             btnLinkQToR.UseVisualStyleBackColor = true;
             btnLinkQToR.Click += btnLinkQToR_Click;
             // 
+            // cboLinkRace
+            // 
+            cboLinkRace.FormattingEnabled = true;
+            cboLinkRace.Location = new Point(120, 284);
+            cboLinkRace.Name = "cboLinkRace";
+            cboLinkRace.Size = new Size(367, 23);
+            cboLinkRace.TabIndex = 3;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(24, 287);
+            label1.Name = "label1";
+            label1.Size = new Size(73, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Set Race link";
+            // 
             // frmManageSessions
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1398, 599);
+            Controls.Add(label1);
+            Controls.Add(cboLinkRace);
             Controls.Add(btnLinkQToR);
             Controls.Add(grdQualy);
             Controls.Add(grdRaces);
@@ -85,6 +107,7 @@
             ((System.ComponentModel.ISupportInitialize)grdRaces).EndInit();
             ((System.ComponentModel.ISupportInitialize)grdQualy).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -92,5 +115,7 @@
         private DataGridView grdRaces;
         private DataGridView grdQualy;
         private Button btnLinkQToR;
+        private ComboBox cboLinkRace;
+        private Label label1;
     }
 }
