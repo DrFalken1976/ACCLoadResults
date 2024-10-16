@@ -91,6 +91,7 @@
             Controls.Add(label3);
             Controls.Add(cboTracks);
             Controls.Add(button1);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "frmMeteo";
             Text = "frmMeteo";
             ResumeLayout(false);

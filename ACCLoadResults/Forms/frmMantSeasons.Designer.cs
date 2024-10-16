@@ -330,7 +330,7 @@ namespace ACCLoadResults.Forms
             Controls.Add(btnEditSeason);
             Controls.Add(btnNewSeason);
             Controls.Add(grdSeassons);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "frmMantSeasons";
             Text = "MantSeasons";
             Load += MantSeasons_Load;

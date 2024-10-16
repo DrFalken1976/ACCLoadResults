@@ -39,9 +39,11 @@ namespace ACCLoadResults
                                      (c.Name.Contains("_R") || c.Name.Contains("_Q")) &&
                                      (c.Modified >= calDate.Value && c.Modified <= calDate.Value.AddDays(1).AddHours(4))
                                orderby c.Modified descending
-                               select c;
+                               select new { c.Name, c.Modified };
                 
                 grdAvFiles.DataSource = DifFiles.ToArray();
+
+                grdAvFiles.Columns[0].Width = 300;
 
             }
 

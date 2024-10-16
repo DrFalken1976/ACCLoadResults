@@ -173,6 +173,7 @@
             Controls.Add(btnExportGeneral);
             Controls.Add(label1);
             Controls.Add(cboSeason);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "frmLeaderBoard";
             Text = "frmLeaderBoard";
             Load += frmLeaderBoard_Load;

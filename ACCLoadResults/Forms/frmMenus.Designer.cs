@@ -167,6 +167,7 @@
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "frmMenus";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmMenucs";
