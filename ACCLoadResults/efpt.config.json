@@ -87,6 +87,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[vGetRaceCSVFile]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[vSeasonRaceLeaderBoard]",
          "ObjectType": 3
       },

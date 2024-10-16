@@ -41,6 +41,9 @@
     <None Update="DownloadFiles\ReadME.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ExportFiles\ReadME.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="RaceDataFiles\ReadME.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

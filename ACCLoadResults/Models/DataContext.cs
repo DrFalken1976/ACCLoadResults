@@ -53,6 +53,8 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<vGetCompleteSessions> vGetCompleteSessions { get; set; }
 
+    public virtual DbSet<vGetRaceCSVFile> vGetRaceCSVFile { get; set; }
+
     public virtual DbSet<vSeasonRaceLeaderBoard> vSeasonRaceLeaderBoard { get; set; }
 
     public virtual DbSet<vSessionLaps> vSessionLaps { get; set; }
@@ -352,15 +354,9 @@ public partial class DataContext : DbContext
                 .HasNoKey()
                 .ToView("vGetClassification");
 
-            entity.Property(e => e.GameTag)
-                .IsRequired()
-                .HasMaxLength(50)
-                .IsFixedLength();
+            entity.Property(e => e.GameTag).HasMaxLength(50);
             entity.Property(e => e.IdSeason).HasColumnType("numeric(18, 0)");
-            entity.Property(e => e.IdTemporada)
-                .IsRequired()
-                .HasMaxLength(100)
-                .IsFixedLength();
+            entity.Property(e => e.IdTemporada).HasMaxLength(100);
             entity.Property(e => e.MitjaPuntsPerCursa).HasColumnType("decimal(16, 13)");
         });
 
@@ -407,6 +403,39 @@ public partial class DataContext : DbContext
             entity.Property(e => e.trackName)
                 .IsRequired()
                 .HasMaxLength(150);
+        });
+
+        modelBuilder.Entity<vGetRaceCSVFile>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("vGetRaceCSVFile");
+
+            entity.Property(e => e.CursaLlarga)
+                .IsRequired()
+                .HasMaxLength(5)
+                .IsUnicode(false);
+            entity.Property(e => e.GameTag).HasMaxLength(50);
+            entity.Property(e => e.IDSession).HasColumnType("numeric(8, 0)");
+            entity.Property(e => e.IdCircuit).HasMaxLength(4000);
+            entity.Property(e => e.IdTemporada).HasMaxLength(100);
+            entity.Property(e => e.InfoPuntsExtres)
+                .IsRequired()
+                .HasMaxLength(47)
+                .IsUnicode(false);
+            entity.Property(e => e.Pole)
+                .IsRequired()
+                .HasMaxLength(5)
+                .IsUnicode(false);
+            entity.Property(e => e.SessionDate).HasColumnType("date");
+            entity.Property(e => e.SessionHour)
+                .IsRequired()
+                .HasMaxLength(8)
+                .IsFixedLength();
+            entity.Property(e => e.VoltaRapida)
+                .IsRequired()
+                .HasMaxLength(5)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<vSeasonRaceLeaderBoard>(entity =>
