@@ -7,6 +7,8 @@ namespace ACCLoadResults.Models;
 
 public partial class vSessionLeaderBoard
 {
+    public decimal? IdSeason { get; set; }
+
     public decimal IDSession { get; set; }
 
     public decimal? IDQualySession { get; set; }

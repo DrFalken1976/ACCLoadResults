@@ -38,6 +38,8 @@
             label2 = new Label();
             label1 = new Label();
             grdAvFiles = new DataGridView();
+            label4 = new Label();
+            calDate = new DateTimePicker();
             gbStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grdAvFiles).BeginInit();
             SuspendLayout();
@@ -146,11 +148,31 @@
             grdAvFiles.Size = new Size(981, 227);
             grdAvFiles.TabIndex = 3;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(40, 263);
+            label4.Name = "label4";
+            label4.Size = new Size(58, 15);
+            label4.TabIndex = 4;
+            label4.Text = "Date filter";
+            // 
+            // calDate
+            // 
+            calDate.CustomFormat = "dd/MM/yyyy";
+            calDate.Location = new Point(104, 260);
+            calDate.Name = "calDate";
+            calDate.Size = new Size(200, 23);
+            calDate.TabIndex = 5;
+            calDate.ValueChanged += calDate_ValueChanged;
+            // 
             // frmLoadData
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1068, 522);
+            Controls.Add(calDate);
+            Controls.Add(label4);
             Controls.Add(grdAvFiles);
             Controls.Add(gbStatus);
             Controls.Add(prgLoad);
@@ -167,6 +189,7 @@
             gbStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)grdAvFiles).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -181,5 +204,7 @@
         private Label label2;
         private Label label1;
         private DataGridView grdAvFiles;
+        private Label label4;
+        private DateTimePicker calDate;
     }
 }

@@ -49,6 +49,8 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<penalties> penalties { get; set; }
 
+    public virtual DbSet<vGetClassification> vGetClassification { get; set; }
+
     public virtual DbSet<vGetCompleteSessions> vGetCompleteSessions { get; set; }
 
     public virtual DbSet<vSeasonRaceLeaderBoard> vSeasonRaceLeaderBoard { get; set; }
@@ -215,6 +217,10 @@ public partial class DataContext : DbContext
             entity.Property(e => e.ID)
                 .ValueGeneratedOnAdd()
                 .HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.Category)
+                .IsRequired()
+                .HasMaxLength(3)
+                .IsFixedLength();
             entity.Property(e => e.DateEnd).HasColumnType("date");
             entity.Property(e => e.DateStart).HasColumnType("date");
             entity.Property(e => e.Name)
@@ -338,6 +344,24 @@ public partial class DataContext : DbContext
             entity.Property(e => e.reason)
                 .IsRequired()
                 .HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<vGetClassification>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("vGetClassification");
+
+            entity.Property(e => e.GameTag)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsFixedLength();
+            entity.Property(e => e.IdSeason).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.IdTemporada)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsFixedLength();
+            entity.Property(e => e.MitjaPuntsPerCursa).HasColumnType("decimal(16, 13)");
         });
 
         modelBuilder.Entity<vGetCompleteSessions>(entity =>
@@ -554,6 +578,7 @@ public partial class DataContext : DbContext
             entity.Property(e => e.CarModel).HasMaxLength(107);
             entity.Property(e => e.IDQualySession).HasColumnType("numeric(8, 0)");
             entity.Property(e => e.IDSession).HasColumnType("numeric(8, 0)");
+            entity.Property(e => e.IdSeason).HasColumnType("numeric(18, 0)");
             entity.Property(e => e.LastLap)
                 .HasMaxLength(20)
                 .IsFixedLength();
@@ -585,7 +610,7 @@ public partial class DataContext : DbContext
             entity.Property(e => e.TotalTime)
                 .HasMaxLength(20)
                 .IsFixedLength();
-            entity.Property(e => e.TotalTimeNumeric).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.TotalTimeNumeric).HasColumnType("numeric(10, 0)");
             entity.Property(e => e.TrackName).HasMaxLength(4000);
         });
 

@@ -31,7 +31,7 @@
             grdRaces = new DataGridView();
             grdQualy = new DataGridView();
             btnLinkQToR = new Button();
-            cboLinkRace = new ComboBox();
+            cboSeason = new ComboBox();
             label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)grdRaces).BeginInit();
             ((System.ComponentModel.ISupportInitialize)grdQualy).BeginInit();
@@ -70,22 +70,23 @@
             btnLinkQToR.UseVisualStyleBackColor = true;
             btnLinkQToR.Click += btnLinkQToR_Click;
             // 
-            // cboLinkRace
+            // cboSeason
             // 
-            cboLinkRace.FormattingEnabled = true;
-            cboLinkRace.Location = new Point(120, 284);
-            cboLinkRace.Name = "cboLinkRace";
-            cboLinkRace.Size = new Size(367, 23);
-            cboLinkRace.TabIndex = 3;
+            cboSeason.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboSeason.FormattingEnabled = true;
+            cboSeason.Location = new Point(120, 284);
+            cboSeason.Name = "cboSeason";
+            cboSeason.Size = new Size(367, 23);
+            cboSeason.TabIndex = 3;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(24, 287);
             label1.Name = "label1";
-            label1.Size = new Size(73, 15);
+            label1.Size = new Size(44, 15);
             label1.TabIndex = 4;
-            label1.Text = "Set Race link";
+            label1.Text = "Season";
             // 
             // frmManageSessions
             // 
@@ -93,7 +94,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1398, 599);
             Controls.Add(label1);
-            Controls.Add(cboLinkRace);
+            Controls.Add(cboSeason);
             Controls.Add(btnLinkQToR);
             Controls.Add(grdQualy);
             Controls.Add(grdRaces);
@@ -115,7 +116,7 @@
         private DataGridView grdRaces;
         private DataGridView grdQualy;
         private Button btnLinkQToR;
-        private ComboBox cboLinkRace;
+        private ComboBox cboSeason;
         private Label label1;
     }
 }

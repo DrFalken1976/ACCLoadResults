@@ -1,4 +1,6 @@
-﻿namespace ACCLoadResults.Forms
+﻿using System.Windows.Forms;
+
+namespace ACCLoadResults.Forms
 {
     public partial class frmMenus : Form
     {
@@ -53,5 +55,10 @@
             oForm.ShowDialog();
         }
 
+        private void btnClassificacio_Click(object sender, EventArgs e)
+        {
+            frmLeaderBoard oForm = new frmLeaderBoard();
+            oForm.ShowDialog();
+        }
     }
 }

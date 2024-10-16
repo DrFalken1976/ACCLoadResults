@@ -1,4 +1,5 @@
 using ACCLoadResults.Classes;
+using ACCLoadResults.Models;
 using FluentFTP;
 using Newtonsoft.Json;
 using System.Data;
@@ -13,11 +14,12 @@ namespace ACCLoadResults
         public frmLoadData()
         {
             InitializeComponent();
+            calDate.Value = DateTime.Now.Date;
         }
 
         private void frmLoadData_Load(object sender, EventArgs e)
         {
-
+            
 
             using (var conn = new FtpClient())
             {
@@ -33,10 +35,12 @@ namespace ACCLoadResults
                 //Get Only not exist in DB
 
                 var DifFiles = from c in conn.GetListing()
-                               where !(from Datos in Classes.Globals.oData.Sessions select Datos.LogFileName.ToUpper().Trim()).Contains(c.Name.ToUpper().Trim())
+                               where !(from Datos in Classes.Globals.oData.Sessions select Datos.LogFileName.ToUpper().Trim()).Contains(c.Name.ToUpper().Trim()) &&
+                                     (c.Name.Contains("_R") || c.Name.Contains("_Q")) &&
+                                     (c.Modified >= calDate.Value && c.Modified <= calDate.Value.AddDays(1).AddHours(4))
                                orderby c.Modified descending
                                select c;
-
+                
                 grdAvFiles.DataSource = DifFiles.ToArray();
 
             }
@@ -287,5 +291,9 @@ namespace ACCLoadResults
 
         }
 
+        private void calDate_ValueChanged(object sender, EventArgs e)
+        {
+            frmLoadData_Load(sender, e);
+        }
     }
 }

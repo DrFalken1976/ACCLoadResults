@@ -147,6 +147,7 @@
             btnClassificacio.TabIndex = 4;
             btnClassificacio.Text = "Generate Leaderboard";
             btnClassificacio.UseVisualStyleBackColor = true;
+            btnClassificacio.Click += btnClassificacio_Click;
             // 
             // btnMantSeason
             // 
