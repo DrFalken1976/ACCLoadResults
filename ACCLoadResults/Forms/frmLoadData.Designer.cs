@@ -46,9 +46,9 @@
             // 
             // btnLoadFiles
             // 
-            btnLoadFiles.Location = new Point(221, 289);
+            btnLoadFiles.Location = new Point(41, 289);
             btnLoadFiles.Name = "btnLoadFiles";
-            btnLoadFiles.Size = new Size(607, 40);
+            btnLoadFiles.Size = new Size(592, 40);
             btnLoadFiles.TabIndex = 0;
             btnLoadFiles.Text = "Load Server Files";
             btnLoadFiles.UseVisualStyleBackColor = true;
@@ -56,9 +56,9 @@
             // 
             // prgLoad
             // 
-            prgLoad.Location = new Point(221, 335);
+            prgLoad.Location = new Point(41, 335);
             prgLoad.Name = "prgLoad";
-            prgLoad.Size = new Size(607, 23);
+            prgLoad.Size = new Size(592, 23);
             prgLoad.TabIndex = 1;
             // 
             // gbStatus
@@ -69,9 +69,9 @@
             gbStatus.Controls.Add(label3);
             gbStatus.Controls.Add(label2);
             gbStatus.Controls.Add(label1);
-            gbStatus.Location = new Point(242, 377);
+            gbStatus.Location = new Point(62, 377);
             gbStatus.Name = "gbStatus";
-            gbStatus.Size = new Size(558, 116);
+            gbStatus.Size = new Size(543, 116);
             gbStatus.TabIndex = 2;
             gbStatus.TabStop = false;
             gbStatus.Text = "Load status";
@@ -145,7 +145,7 @@
             grdAvFiles.Name = "grdAvFiles";
             grdAvFiles.RowTemplate.Height = 25;
             grdAvFiles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grdAvFiles.Size = new Size(981, 227);
+            grdAvFiles.Size = new Size(592, 227);
             grdAvFiles.TabIndex = 3;
             // 
             // label4
@@ -170,7 +170,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1068, 522);
+            ClientSize = new Size(674, 522);
             Controls.Add(calDate);
             Controls.Add(label4);
             Controls.Add(grdAvFiles);
