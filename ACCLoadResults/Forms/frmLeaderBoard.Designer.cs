@@ -39,6 +39,7 @@
             grdSession = new DataGridView();
             label2 = new Label();
             cboRaces = new ComboBox();
+            btnSaveDataHist = new Button();
             tabControl1.SuspendLayout();
             TabLeaderBoard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grdLeaderBoard).BeginInit();
@@ -68,7 +69,7 @@
             // 
             // btnExportGeneral
             // 
-            btnExportGeneral.Location = new Point(997, 8);
+            btnExportGeneral.Location = new Point(1005, 4);
             btnExportGeneral.Name = "btnExportGeneral";
             btnExportGeneral.Size = new Size(167, 23);
             btnExportGeneral.TabIndex = 10;
@@ -78,7 +79,7 @@
             // 
             // btnExportRace
             // 
-            btnExportRace.Location = new Point(1178, 8);
+            btnExportRace.Location = new Point(1178, 4);
             btnExportRace.Name = "btnExportRace";
             btnExportRace.Size = new Size(167, 23);
             btnExportRace.TabIndex = 11;
@@ -161,11 +162,22 @@
             cboRaces.TabIndex = 13;
             cboRaces.SelectedIndexChanged += cboRaces_SelectedIndexChanged;
             // 
+            // btnSaveDataHist
+            // 
+            btnSaveDataHist.Location = new Point(892, 4);
+            btnSaveDataHist.Name = "btnSaveDataHist";
+            btnSaveDataHist.Size = new Size(107, 23);
+            btnSaveDataHist.TabIndex = 15;
+            btnSaveDataHist.Text = "Save History";
+            btnSaveDataHist.UseVisualStyleBackColor = true;
+            btnSaveDataHist.Click += btnSaveDataHist_Click;
+            // 
             // frmLeaderBoard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1348, 790);
+            Controls.Add(btnSaveDataHist);
             Controls.Add(label2);
             Controls.Add(cboRaces);
             Controls.Add(tabControl1);
@@ -199,5 +211,6 @@
         private DataGridView grdSession;
         private Label label2;
         private ComboBox cboRaces;
+        private Button btnSaveDataHist;
     }
 }

@@ -36,7 +36,6 @@
             button1 = new Button();
             btnCreateTeams = new Button();
             groupBox3 = new GroupBox();
-            button2 = new Button();
             btnClassificacio = new Button();
             btnMantSeason = new Button();
             groupBox1.SuspendLayout();
@@ -119,7 +118,6 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(button2);
             groupBox3.Controls.Add(btnClassificacio);
             groupBox3.Controls.Add(btnMantSeason);
             groupBox3.Location = new Point(638, 51);
@@ -128,16 +126,6 @@
             groupBox3.TabIndex = 6;
             groupBox3.TabStop = false;
             groupBox3.Text = "Manage Seasons";
-            // 
-            // button2
-            // 
-            button2.Location = new Point(41, 263);
-            button2.Name = "button2";
-            button2.Size = new Size(212, 69);
-            button2.TabIndex = 5;
-            button2.Text = "Race Analysis";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += btnRaceAna_Click;
             // 
             // btnClassificacio
             // 
@@ -187,7 +175,6 @@
         private Button btnCreateTeams;
         private Button button1;
         private GroupBox groupBox3;
-        private Button button2;
         private Button btnClassificacio;
         private Button btnMantSeason;
     }

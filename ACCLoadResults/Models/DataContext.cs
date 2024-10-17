@@ -35,6 +35,8 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<Seasons> Seasons { get; set; }
 
+    public virtual DbSet<SeasonsLeaderBoardHistory> SeasonsLeaderBoardHistory { get; set; }
+
     public virtual DbSet<Sessions> Sessions { get; set; }
 
     public virtual DbSet<TeamsByRace> TeamsByRace { get; set; }
@@ -229,6 +231,24 @@ public partial class DataContext : DbContext
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsFixedLength();
+        });
+
+        modelBuilder.Entity<SeasonsLeaderBoardHistory>(entity =>
+        {
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.GameTag)
+                .IsRequired()
+                .HasMaxLength(20)
+                .IsFixedLength();
+            entity.Property(e => e.IdSeason).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.IdSession).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.IdTemporada)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsFixedLength();
+            entity.Property(e => e.MitjaPuntsPerCursa).HasColumnType("numeric(6, 2)");
         });
 
         modelBuilder.Entity<Sessions>(entity =>

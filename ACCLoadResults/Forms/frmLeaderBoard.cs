@@ -48,8 +48,8 @@ namespace ACCLoadResults.Forms
                               Data.IDSession equals Season.IdSession
                           where Season.IdSeason == (Decimal)cboSeason.SelectedValue
                           select new { Data.IDSession, IdCircuit = Data.IdCircuit + " (" + Data.SessionHour + ")", Data.SessionDate }
-                         ).Distinct().OrderByDescending(o=> o.SessionDate) .ToList();
-            
+                         ).Distinct().OrderByDescending(o => o.SessionDate).ToList();
+
             cboRaces.ValueMember = "IDSession";
             cboRaces.DisplayMember = "IdCircuit";
             cboRaces.DataSource = oRaces;
@@ -78,6 +78,18 @@ namespace ACCLoadResults.Forms
                     row.Cells["DiffLider"].Value = (LeaderPoints - (int)row.Cells["Puntuacio"].Value) * -1;
                     row.Cells["MitjaPuntsPerCursa"].Value = Math.Round((decimal)row.Cells["MitjaPuntsPerCursa"].Value, 2);
                 }
+
+                //Verify if exist in season leaderboard history table
+
+                List<SeasonsLeaderBoardHistory> oHist = (from Data in Globals.oData.SeasonsLeaderBoardHistory
+                                                         where
+                                                                Data.IdSeason == (Decimal)cboSeason.SelectedValue &&
+                                                                Data.IdSession == (Decimal)cboRaces.SelectedValue
+                                                         select Data
+                                                        ).ToList();
+
+
+
             }
 
         }
@@ -168,6 +180,74 @@ namespace ACCLoadResults.Forms
                 string CSVPath = AppPath + @"\ExportFiles\" + SelRace.Trim() + ".csv";
                 ExportarDataGridViewACSV(grdSession, CSVPath);
             }
+        }
+
+        private bool SaveDataInHistory()
+        {
+
+            try
+            {
+                List<SeasonsLeaderBoardHistory> oHist = (from Data in Globals.oData.SeasonsLeaderBoardHistory
+                                                         where
+                                                                Data.IdSeason == (Decimal)cboSeason.SelectedValue &&
+                                                                Data.IdSession == (Decimal)cboRaces.SelectedValue
+                                                         select Data
+                                                        ).ToList();
+
+                //If don't have any data
+                if (!oHist.Any())
+                {
+
+                    //Create new record with data.
+                    List<vGetClassification> oClassHist = (from Data in Globals.oData.vGetClassification
+                                                           where Data.IdSeason == (Decimal)cboSeason.SelectedValue
+                                                           orderby Data.Puntuacio descending
+                                                           select Data).ToList();
+
+
+                    foreach (vGetClassification Data in oClassHist)
+                    {
+
+                        SeasonsLeaderBoardHistory NewSeasonsH = new SeasonsLeaderBoardHistory();
+                        NewSeasonsH.IdSeason = (Decimal)cboSeason.SelectedValue;
+                        NewSeasonsH.IdTemporada = Data.IdTemporada;
+                        NewSeasonsH.IdSession = (Decimal)cboRaces.SelectedValue;
+                        NewSeasonsH.Posicio = (int)Data.Posicio;
+                        NewSeasonsH.GameTag = Data.GameTag;
+                        NewSeasonsH.Puntuacio = (int)Data.Puntuacio;
+                        NewSeasonsH.SancionsTemps = Data.SancionsTemps;
+                        NewSeasonsH.SancionsBox = Data.SancionsBox;
+                        NewSeasonsH.Poles = (int)Data.Poles;
+                        NewSeasonsH.VoltesRapides = (int)Data.VoltesRapides;
+                        NewSeasonsH.Curses = (int)Data.Curses;
+                        NewSeasonsH.DiffPunts = (int)Data.DiffPunts;
+                        NewSeasonsH.DiffLider = (int)Data.DiffLider;
+                        NewSeasonsH.MitjaPuntsPerCursa = Data.MitjaPuntsPerCursa;
+
+                        Globals.oData.SeasonsLeaderBoardHistory.Add(NewSeasonsH);
+
+                    }
+
+                    Globals.oData.SaveChanges();
+
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show("Error on save data history", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+
+            }
+
+        }
+
+        private void btnSaveDataHist_Click(object sender, EventArgs e)
+        {
+            SaveDataInHistory();
         }
     }
 }

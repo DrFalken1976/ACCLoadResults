@@ -5,29 +5,33 @@ using System.Collections.Generic;
 
 namespace ACCLoadResults.Models;
 
-public partial class vGetClassification
+public partial class SeasonsLeaderBoardHistory
 {
-    public decimal? IdSeason { get; set; }
+    public decimal Id { get; set; }
+
+    public decimal IdSeason { get; set; }
 
     public string IdTemporada { get; set; }
 
-    public long? Posicio { get; set; }
+    public decimal IdSession { get; set; }
+
+    public int Posicio { get; set; }
 
     public string GameTag { get; set; }
 
-    public int? Puntuacio { get; set; }
+    public int Puntuacio { get; set; }
 
     public int SancionsTemps { get; set; }
 
     public int SancionsBox { get; set; }
 
-    public int? Poles { get; set; }
+    public int Poles { get; set; }
 
-    public int? VoltesRapides { get; set; }
+    public int VoltesRapides { get; set; }
 
-    public int? Curses { get; set; }
+    public int Curses { get; set; }
 
-    public int? DiffPunts { get; set; }
+    public int DiffPunts { get; set; }
 
     public int DiffLider { get; set; }
 

@@ -55,6 +55,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[SeasonsLeaderBoardHistory]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Sessions]",
          "ObjectType": 0
       },

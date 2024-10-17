@@ -26,14 +26,6 @@ namespace ACCLoadResults.Forms
 
         }
 
-        private void btnRaceAna_Click(object sender, EventArgs e)
-        {
-
-            frmRaceAnalysis oForm = new frmRaceAnalysis();
-            oForm.ShowDialog();
-
-        }
-
         private void btnCreateTeams_Click(object sender, EventArgs e)
         {
 
@@ -58,6 +50,12 @@ namespace ACCLoadResults.Forms
         private void btnClassificacio_Click(object sender, EventArgs e)
         {
             frmLeaderBoard oForm = new frmLeaderBoard();
+            oForm.ShowDialog();
+        }
+
+        private void btnRaceAna_Click(object sender, EventArgs e)
+        {
+            frmRaceAnalysis oForm = new frmRaceAnalysis();
             oForm.ShowDialog();
         }
     }
