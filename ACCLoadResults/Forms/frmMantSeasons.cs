@@ -33,7 +33,7 @@ namespace ACCLoadResults.Forms
         private void MantSeasons_Load(object sender, EventArgs e)
         {
             //Get all Seasons & Load in dataGrid
-            _Seasons = (from Data in Globals.oData.Seasons orderby Data.ID descending select Data).ToList();
+            _Seasons = (from Data in Globals.oData.Seasons orderby Data.Active descending, Data.DateStart descending select Data).ToList();
             grdSeassons.DataSource = _Seasons;
 
         }
