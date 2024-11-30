@@ -79,16 +79,6 @@ namespace ACCLoadResults.Forms
                     row.Cells["MitjaPuntsPerCursa"].Value = Math.Round((decimal)row.Cells["MitjaPuntsPerCursa"].Value, 2);
                 }
 
-                //Verify if exist in season leaderboard history table
-
-                List<SeasonsLeaderBoardHistory> oHist = (from Data in Globals.oData.SeasonsLeaderBoardHistory
-                                                         where
-                                                                Data.IdSeason == (Decimal)cboSeason.SelectedValue &&
-                                                                Data.IdSession == (Decimal)cboRaces.SelectedValue
-                                                         select Data
-                                                        ).ToList();
-
-
 
             }
 
@@ -167,6 +157,10 @@ namespace ACCLoadResults.Forms
                 grdSession.Columns.Remove("SessionHour");
 
             }
+
+
+
+
 
         }
 
