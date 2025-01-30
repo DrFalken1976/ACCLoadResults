@@ -91,7 +91,14 @@ namespace ACCLoadResults.Forms
 
                 Models.Seasons SelSeason = (Models.Seasons)cboSeason.SelectedItem;
 
-                string CSVPath = AppPath + @"\ExportFiles\" + SelSeason.Name.Trim() + ".csv";
+                string CSVPath = AppPath + @"\ExportFiles\" + SelSeason.Name.Trim();
+
+                if (!System.IO.Directory.Exists(CSVPath))
+                 System.IO.Directory.CreateDirectory(CSVPath); 
+
+                CSVPath += @"\" + SelSeason.Name.Trim() + ".csv";
+
+
                 ExportarDataGridViewACSV(grdLeaderBoard, CSVPath);
             }
         }
@@ -139,8 +146,10 @@ namespace ACCLoadResults.Forms
         private void cboRaces_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            grdSession.DataSource = null;
+
             //Get LeaderBoard
-            List<vGetRaceCSVFile> oClassf = (from Data in Globals.oData.vGetRaceCSVFile
+            List <vGetRaceCSVFile> oClassf = (from Data in Globals.oData.vGetRaceCSVFile
                                              where Data.IDSession == (Decimal)cboRaces.SelectedValue
                                              orderby Data.Posicio ascending
                                              select Data).ToList();
@@ -170,8 +179,19 @@ namespace ACCLoadResults.Forms
             {
 
                 string SelRace = cboRaces.Text.Replace("(", "").Replace(")", "").Replace(":", "-");
+                string IdCircuit = SelRace.Substring(0, SelRace.IndexOf("Race") - 1);
 
-                string CSVPath = AppPath + @"\ExportFiles\" + SelRace.Trim() + ".csv";
+                Models.Seasons SelSeason = (Models.Seasons)cboSeason.SelectedItem;
+                string SeassonPath = AppPath + @"\ExportFiles\" + SelSeason.Name.Trim();
+
+                if (!System.IO.Directory.Exists(SeassonPath))
+                    System.IO.Directory.CreateDirectory(SeassonPath);
+
+                string CircuitPath = SeassonPath + @"\" + IdCircuit;
+                if (!System.IO.Directory.Exists(CircuitPath))
+                    System.IO.Directory.CreateDirectory(CircuitPath);
+
+                string CSVPath = CircuitPath + @"\" + SelRace.Trim() + ".csv";
                 ExportarDataGridViewACSV(grdSession, CSVPath);
             }
         }
