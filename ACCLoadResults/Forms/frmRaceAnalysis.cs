@@ -673,58 +673,63 @@ namespace ACCLoadResults.Forms
                 foreach (string Pilot in Pilots)
                 {
 
-                    Random random = new Random();
-                    string sPilot = Pilot.Replace(" ", string.Empty);
-
-                    //Create Data by Pilot
-                    htmlPart += "const " + sPilot + " = {" + Environment.NewLine;
-                    htmlPart += "  label: '" + sPilot + "', " + Environment.NewLine;
-                    htmlPart += "  borderColor: 'rgba(" + random.Next(256).ToString() + ", " + random.Next(256).ToString() + ", " + random.Next(256).ToString() + ", 1.8)'," + Environment.NewLine;
-                    htmlPart += "  fill: false," + Environment.NewLine;
-                    htmlPart += "  tension: 0.1, " + Environment.NewLine;
-
-                    sPilotaDataSets += sPilot + ",";
-
                     //Get Laps
                     List<long?> PosByLapPilot = (from Datos in Globals.oData.vSessionLaps where Datos.IDSession == decimal.Parse(_IDSession) && Datos.NickName.Trim() == Pilot select Datos.Position).ToList();
 
-                    //Get IDQualy
-                    decimal? lngIDQualy = (from Datos in Globals.oData.vSessionLaps where Datos.IDSession == decimal.Parse(_IDSession) && Datos.NickName.Trim() == Pilot select Datos.IDQualySession).ToList().First();
-
-                    //Get Initial possition
-                    var qryInitPos = (from Datos in Globals.oData.LeaderBoard where Datos.IDSession == lngIDQualy && Datos.lastName.Trim() == Pilot select Datos.Position);
-
-                    //Default 99 (control No Qualy Challenge)
-                    long PosInitialPilot = Pilots.Count();
-
-                    if (qryInitPos.Any())
-                        PosInitialPilot = (from Datos in Globals.oData.LeaderBoard where Datos.IDSession == lngIDQualy && Datos.lastName.Trim() == Pilot select Datos.Position).ToList().First();
-
-                    //If any qualy
-                    if (lngIDQualy != null)
+                    if (PosByLapPilot.Any())
                     {
-                        htmlPart += "  data: [" + PosInitialPilot.ToString() + ",";
-                    }
 
-                    if (PosByLapPilot.Count > 0)
-                    {
-                        //Ad Position x Lap
-                        if (lngIDQualy == null)
-                            htmlPart += "  data: [";
 
-                        for (int PosLap = 0; PosLap <= PosByLapPilot.Count() - 1; PosLap++)
+                        Random random = new Random();
+                        string sPilot = Pilot.Replace(" ", string.Empty).Replace("#", string.Empty);
+
+                        //Create Data by Pilot
+                        htmlPart += "const " + sPilot + " = {" + Environment.NewLine;
+                        htmlPart += "  label: '" + sPilot + "', " + Environment.NewLine;
+                        htmlPart += "  borderColor: 'rgba(" + random.Next(256).ToString() + ", " + random.Next(256).ToString() + ", " + random.Next(256).ToString() + ", 1.8)'," + Environment.NewLine;
+                        htmlPart += "  fill: false," + Environment.NewLine;
+                        htmlPart += "  tension: 0.1, " + Environment.NewLine;
+
+                        sPilotaDataSets += sPilot + ",";
+
+                        
+                        //Get IDQualy
+                        decimal? lngIDQualy = (from Datos in Globals.oData.vSessionLaps where Datos.IDSession == decimal.Parse(_IDSession) && Datos.NickName.Trim() == Pilot select Datos.IDQualySession).ToList().First();
+
+                        //Get Initial possition
+                        var qryInitPos = (from Datos in Globals.oData.LeaderBoard where Datos.IDSession == lngIDQualy && Datos.lastName.Trim() == Pilot select Datos.Position);
+
+                        //Default 99 (control No Qualy Challenge)
+                        long PosInitialPilot = Pilots.Count();
+
+                        if (qryInitPos.Any())
+                            PosInitialPilot = (from Datos in Globals.oData.LeaderBoard where Datos.IDSession == lngIDQualy && Datos.lastName.Trim() == Pilot select Datos.Position).ToList().First();
+
+                        //If any qualy
+                        if (lngIDQualy != null)
                         {
-                            htmlPart += PosByLapPilot[PosLap].ToString();
-                            if (PosLap < PosByLapPilot.Count() - 1)
-                                htmlPart += ",";
-
+                            htmlPart += "  data: [" + PosInitialPilot.ToString() + ",";
                         }
 
-                        htmlPart += "]};" + Environment.NewLine;
-                    }
-                    else
-                        htmlPart += "data: []};" + Environment.NewLine;
+                        if (PosByLapPilot.Count > 0)
+                        {
+                            //Ad Position x Lap
+                            if (lngIDQualy == null)
+                                htmlPart += "  data: [";
 
+                            for (int PosLap = 0; PosLap <= PosByLapPilot.Count() - 1; PosLap++)
+                            {
+                                htmlPart += PosByLapPilot[PosLap].ToString();
+                                if (PosLap < PosByLapPilot.Count() - 1)
+                                    htmlPart += ",";
+
+                            }
+
+                            htmlPart += "]};" + Environment.NewLine;
+                        }
+                        else
+                            htmlPart += "data: []};" + Environment.NewLine;
+                    }
 
                 }
 
