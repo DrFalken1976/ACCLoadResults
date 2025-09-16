@@ -55,6 +55,8 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<vGetCompleteSessions> vGetCompleteSessions { get; set; }
 
+    public virtual DbSet<vGetQualyResult> vGetQualyResult { get; set; }
+
     public virtual DbSet<vGetRaceCSVFile> vGetRaceCSVFile { get; set; }
 
     public virtual DbSet<vSeasonRaceLeaderBoard> vSeasonRaceLeaderBoard { get; set; }
@@ -68,11 +70,13 @@ public partial class DataContext : DbContext
     public virtual DbSet<vStatsRaceVsQualy> vStatsRaceVsQualy { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=ACCSessionsData;Integrated Security=True;TrustServerCertificate=True");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=ACCSessionsData;Integrated Security=True;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
+
         modelBuilder.Entity<Cars>(entity =>
         {
             entity.Property(e => e.ID).ValueGeneratedNever();
@@ -183,6 +187,7 @@ public partial class DataContext : DbContext
             entity.Property(e => e.Date).HasColumnType("date");
             entity.Property(e => e.IdSeason).HasColumnType("numeric(18, 0)");
             entity.Property(e => e.IdTrack).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.OnlySumFirstQualy).HasAnnotation("Relational:DefaultConstraintName", "DF_SeasonCalendar_OnlySumFirstQualy");
         });
 
         modelBuilder.Entity<SeasonClassification>(entity =>
@@ -221,6 +226,7 @@ public partial class DataContext : DbContext
             entity.Property(e => e.ID)
                 .ValueGeneratedOnAdd()
                 .HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.Active).HasAnnotation("Relational:DefaultConstraintName", "DF_Seasons_Active");
             entity.Property(e => e.Category)
                 .IsRequired()
                 .HasMaxLength(3)
@@ -420,6 +426,29 @@ public partial class DataContext : DbContext
                 .HasMaxLength(2)
                 .IsUnicode(false)
                 .IsFixedLength();
+            entity.Property(e => e.trackName)
+                .IsRequired()
+                .HasMaxLength(150);
+        });
+
+        modelBuilder.Entity<vGetQualyResult>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("vGetQualyResult");
+
+            entity.Property(e => e.BestLap)
+                .HasMaxLength(20)
+                .IsFixedLength();
+            entity.Property(e => e.CarModel)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsFixedLength();
+            entity.Property(e => e.Driver)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsFixedLength();
+            entity.Property(e => e.Photo).HasColumnType("image");
             entity.Property(e => e.trackName)
                 .IsRequired()
                 .HasMaxLength(150);

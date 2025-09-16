@@ -1,0 +1,74 @@
+﻿{
+   "ConnectionStringName": "dab-connection-string",
+   "Dacpac": null,
+   "DatabaseType": 3,
+   "MergeDacpacs": false,
+   "Optional": false,
+   "ProjectPath": "C:\\Users\\Xavi\\source\\repos\\ACCLoadResults\\ACCLoadResults",
+   "Tables": [
+      {
+         "Name": "[dbo].[vGetBestimeByGameTAG]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vGetClassification]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vGetCompleteSessions]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vGetQualyResult]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vGetRaceCSVFile]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vLastRaceResult]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vLeaderBoardControlPanel]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vPalmares]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vPBIClearLaps]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vPBIMapData]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vPBIPenalties]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vSeasonRaceLeaderBoard]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vSessionLaps]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vSessionLeaderBoard]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vSessionPenalties]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vStatsRaceVsQualy]",
+         "ObjectType": 3
+      }
+   ]
+}

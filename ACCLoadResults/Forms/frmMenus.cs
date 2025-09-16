@@ -58,5 +58,11 @@ namespace ACCLoadResults.Forms
             frmRaceAnalysis oForm = new frmRaceAnalysis();
             oForm.ShowDialog();
         }
+
+        private void btnStartRace_Click(object sender, EventArgs e)
+        {
+            FrmStartRaceInfo oForm = new FrmStartRaceInfo();
+            oForm.ShowDialog();
+        }
     }
 }

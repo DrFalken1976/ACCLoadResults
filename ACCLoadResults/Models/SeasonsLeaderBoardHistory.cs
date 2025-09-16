@@ -35,5 +35,5 @@ public partial class SeasonsLeaderBoardHistory
 
     public int DiffLider { get; set; }
 
-    public decimal MitjaPuntsPerCursa { get; set; }
+    public decimal ?MitjaPuntsPerCursa { get; set; }
 }

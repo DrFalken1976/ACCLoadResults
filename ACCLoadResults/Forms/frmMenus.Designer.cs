@@ -38,6 +38,7 @@
             groupBox3 = new GroupBox();
             btnClassificacio = new Button();
             btnMantSeason = new Button();
+            btnStartRace = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -45,6 +46,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnStartRace);
             groupBox1.Controls.Add(btnRaceAna);
             groupBox1.Controls.Add(btnManSes);
             groupBox1.Controls.Add(btnLoadData);
@@ -147,6 +149,16 @@
             btnMantSeason.UseVisualStyleBackColor = true;
             btnMantSeason.Click += btnMantSeason_Click;
             // 
+            // btnStartRace
+            // 
+            btnStartRace.Location = new Point(41, 347);
+            btnStartRace.Name = "btnStartRace";
+            btnStartRace.Size = new Size(212, 69);
+            btnStartRace.TabIndex = 6;
+            btnStartRace.Text = "Start Race";
+            btnStartRace.UseVisualStyleBackColor = true;
+            btnStartRace.Click += btnStartRace_Click;
+            // 
             // frmMenus
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -177,5 +189,6 @@
         private GroupBox groupBox3;
         private Button btnClassificacio;
         private Button btnMantSeason;
+        private Button btnStartRace;
     }
 }

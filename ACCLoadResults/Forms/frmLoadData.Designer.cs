@@ -206,5 +206,6 @@
         private DataGridView grdAvFiles;
         private Label label4;
         private DateTimePicker calDate;
+        private CheckBox chkIntroData;
     }
 }
