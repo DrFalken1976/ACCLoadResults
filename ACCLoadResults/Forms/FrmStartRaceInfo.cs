@@ -173,7 +173,26 @@ namespace ACCLoadResults.Forms
                     else
                         g.DrawString($"Best Lap: {p.BestLap}", f1Font, Brushes.Yellow, x, textY + 30);
 
-                    g.DrawString($"Campeonato: {p.GeneralPos}º", f1Font, Brushes.LightBlue, x, textY + 60);
+
+                    string texto = "Championship position: ";
+                    string valor = $"{p.GeneralPos}º";
+
+                    if (p.GeneralPos == 99)
+                        valor = "First Race";
+
+                    float baseX = x;
+                    float baseY = textY + 60;
+
+                    // Mide el ancho del texto para posicionar el valor justo después
+                    SizeF sizeTexto = g.MeasureString(texto, f1Font);
+
+                    // Dibuja el texto base
+                    g.DrawString(texto, f1Font, Brushes.LightBlue, baseX, baseY);
+
+                    // Dibuja el valor en otro color (por ejemplo, rojo)
+                    g.DrawString(valor, f1Font, Brushes.White, baseX + sizeTexto.Width, baseY);
+
+                    //g.DrawString($"Championship possition: {p.GeneralPos}º", f1Font, Brushes.LightBlue, x, textY + 60);
                 }
             }
         }
@@ -193,23 +212,24 @@ namespace ACCLoadResults.Forms
             SizeF sizeSubtitulo = g.MeasureString(subtitulo, fontSubtitulo);
 
             int centerX = this.ClientSize.Width / 2;
+            float centery = (this.ClientSize.Height / 2) -200;
 
             float y = 80;
 
             // Título principal
-            g.DrawString(titulo, fontTitulo, Brushes.White, centerX - sizeTitulo.Width / 2, y);
+            g.DrawString(titulo, fontTitulo, Brushes.White, centerX - sizeTitulo.Width / 2, centery);
 
             // Línea roja debajo del título
-            y += sizeTitulo.Height + 10;
-            g.FillRectangle(Brushes.Red, centerX - sizeTitulo.Width / 2, y, sizeTitulo.Width, 5);
+            centery += sizeTitulo.Height + 10;
+            g.FillRectangle(Brushes.Red, centerX - sizeTitulo.Width / 2, centery, sizeTitulo.Width, 5);
 
             // Nombre del circuito
-            y += 20;
-            g.DrawString(circuito, fontCircuito, Brushes.LightGray, centerX - sizeCircuito.Width / 2, y);
+            centery += 20;
+            g.DrawString(circuito, fontCircuito, Brushes.LightGray, centerX - sizeCircuito.Width / 2, centery);
 
             // Subtítulo
-            y += sizeCircuito.Height + 20;
-            g.DrawString(subtitulo, fontSubtitulo, Brushes.Yellow, centerX - sizeSubtitulo.Width / 2, y);
+            centery += sizeCircuito.Height + 20;
+            g.DrawString(subtitulo, fontSubtitulo, Brushes.Yellow, centerX - sizeSubtitulo.Width / 2, centery);
         }
 
 
