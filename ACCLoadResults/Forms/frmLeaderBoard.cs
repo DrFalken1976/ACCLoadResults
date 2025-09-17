@@ -214,6 +214,16 @@ namespace ACCLoadResults.Forms
                                                            orderby Data.Puntuacio descending
                                                            select Data).ToList();
 
+                    var QRorder = (from Data in Globals.oData.SeasonsLeaderBoardHistory
+                                   where
+                                        Data.IdSeason == (Decimal)cboSeason.SelectedValue
+                                   select Data.RaceOrder);
+
+
+                    int RaceOrder = 1;
+
+                    if (QRorder.Any())
+                        RaceOrder = QRorder.Max()+1;
 
                     foreach (vGetClassification Data in oClassHist)
                     {
@@ -233,6 +243,7 @@ namespace ACCLoadResults.Forms
                         NewSeasonsH.DiffPunts = (int)Data.DiffPunts;
                         NewSeasonsH.DiffLider = (int)Data.DiffLider;
                         NewSeasonsH.MitjaPuntsPerCursa = Data.MitjaPuntsPerCursa;
+                        NewSeasonsH.RaceOrder = RaceOrder;
 
                         Globals.oData.SeasonsLeaderBoardHistory.Add(NewSeasonsH);
 

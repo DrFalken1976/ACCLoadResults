@@ -36,4 +36,7 @@ public partial class SeasonsLeaderBoardHistory
     public int DiffLider { get; set; }
 
     public decimal ?MitjaPuntsPerCursa { get; set; }
+
+    public int RaceOrder { get; set; }
+    
 }
