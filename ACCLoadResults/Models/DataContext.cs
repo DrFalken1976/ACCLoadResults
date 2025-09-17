@@ -69,6 +69,9 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<vStatsRaceVsQualy> vStatsRaceVsQualy { get; set; }
 
+    public virtual DbSet<vGetGDIClassification> vGetGDIClassification { get; set; }
+    
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=ACCSessionsData;Integrated Security=True;Encrypt=False");
@@ -384,6 +387,20 @@ public partial class DataContext : DbContext
             entity.Property(e => e.IdSeason).HasColumnType("numeric(18, 0)");
             entity.Property(e => e.IdTemporada).HasMaxLength(100);
             entity.Property(e => e.MitjaPuntsPerCursa).HasColumnType("decimal(16, 13)");
+        });
+
+        modelBuilder.Entity<vGetGDIClassification>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("vGetGDIClassification");
+
+            /*entity.Property(e => e.IdTemporada).HasMaxLength(100);
+            entity.Property(e => e.Posicio).HasColumnType("int");
+            entity.Property(e => e.GameTag).HasMaxLength(50);
+            entity.Property(e => e.IdSeason).HasColumnType("numeric(18, 0)");
+            
+            entity.Property(e => e.MitjaPuntsPerCursa).HasColumnType("decimal(16, 13)");*/
         });
 
         modelBuilder.Entity<vGetCompleteSessions>(entity =>

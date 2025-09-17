@@ -32,7 +32,7 @@ namespace ACCLoadResults.Forms
 
             try
             {
-                string rutaMp3 = Path.Combine(AppContext.BaseDirectory, "Assets", "f1.mp3");
+                string rutaMp3 = Path.Combine(AppContext.BaseDirectory, "Assets", "Epic.mp3");
                 player.Play(rutaMp3);
             }
             catch (Exception ex)

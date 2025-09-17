@@ -64,5 +64,11 @@ namespace ACCLoadResults.Forms
             FrmStartRaceInfo oForm = new FrmStartRaceInfo();
             oForm.ShowDialog();
         }
+
+        private void btnGDIClassification_Click(object sender, EventArgs e)
+        {
+            FrmGDIClassification oForm = new FrmGDIClassification();
+            oForm.ShowDialog();
+        }
     }
 }

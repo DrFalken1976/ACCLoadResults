@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            btnStartRace = new Button();
             btnRaceAna = new Button();
             btnManSes = new Button();
             btnLoadData = new Button();
@@ -38,7 +39,7 @@
             groupBox3 = new GroupBox();
             btnClassificacio = new Button();
             btnMantSeason = new Button();
-            btnStartRace = new Button();
+            btnGDIClassification = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -56,6 +57,16 @@
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Manage Data Sessions";
+            // 
+            // btnStartRace
+            // 
+            btnStartRace.Location = new Point(41, 347);
+            btnStartRace.Name = "btnStartRace";
+            btnStartRace.Size = new Size(212, 69);
+            btnStartRace.TabIndex = 6;
+            btnStartRace.Text = "Start Race";
+            btnStartRace.UseVisualStyleBackColor = true;
+            btnStartRace.Click += btnStartRace_Click;
             // 
             // btnRaceAna
             // 
@@ -120,6 +131,7 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(btnGDIClassification);
             groupBox3.Controls.Add(btnClassificacio);
             groupBox3.Controls.Add(btnMantSeason);
             groupBox3.Location = new Point(638, 51);
@@ -149,15 +161,15 @@
             btnMantSeason.UseVisualStyleBackColor = true;
             btnMantSeason.Click += btnMantSeason_Click;
             // 
-            // btnStartRace
+            // btnGDIClassification
             // 
-            btnStartRace.Location = new Point(41, 347);
-            btnStartRace.Name = "btnStartRace";
-            btnStartRace.Size = new Size(212, 69);
-            btnStartRace.TabIndex = 6;
-            btnStartRace.Text = "Start Race";
-            btnStartRace.UseVisualStyleBackColor = true;
-            btnStartRace.Click += btnStartRace_Click;
+            btnGDIClassification.Location = new Point(41, 263);
+            btnGDIClassification.Name = "btnGDIClassification";
+            btnGDIClassification.Size = new Size(212, 69);
+            btnGDIClassification.TabIndex = 7;
+            btnGDIClassification.Text = "Classification";
+            btnGDIClassification.UseVisualStyleBackColor = true;
+            btnGDIClassification.Click += btnGDIClassification_Click;
             // 
             // frmMenus
             // 
@@ -190,5 +202,6 @@
         private Button btnClassificacio;
         private Button btnMantSeason;
         private Button btnStartRace;
+        private Button btnGDIClassification;
     }
 }

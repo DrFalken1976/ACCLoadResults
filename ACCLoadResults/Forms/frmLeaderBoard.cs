@@ -167,10 +167,6 @@ namespace ACCLoadResults.Forms
 
             }
 
-
-
-
-
         }
 
         private void btnExportRace_Click(object sender, EventArgs e)
@@ -245,6 +241,8 @@ namespace ACCLoadResults.Forms
                     Globals.oData.SaveChanges();
 
                 }
+
+                MessageBox.Show("Save data history OK", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 return true;
             }
