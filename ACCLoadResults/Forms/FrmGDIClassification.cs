@@ -146,7 +146,7 @@ namespace ACCLoadResults.Forms
             // Encabezados de columna
             string[] headers = { "Pos", "Driver", "Points", "A.Points", "G.Pos", "G.Points" };
             int[] colX = { 10, 80, 350, 500, 650, 790 };
-            int headerY = lineY + 10;
+            int headerY = lineY + 100;
 
             offsetX += 100;
 
@@ -175,6 +175,8 @@ namespace ACCLoadResults.Forms
                     });
 
             }
+
+            int yFinal = 0;
 
             // Dibujar filas
             for (int i = 0; i < data.Count; i++)
@@ -206,8 +208,28 @@ namespace ACCLoadResults.Forms
 
                     g.DrawString(text, f1Font, brush, offsetX + colX[j], y);
                 }
+
+                yFinal = y;
             }
-        }    
+
+
+            imgLogo = Image.FromFile(@"assets\\Tulsa.png");
+            scale = 0.5f;
+            logoWidth = (int)(imgLogo.Width * scale);
+            logoHeight = (int)(imgLogo.Height * scale);
+            destRect = new Rectangle(offsetX + margin, yFinal+200, logoWidth, logoHeight);
+            g.DrawImage(imgLogo, destRect);
+
+            imgLogo = Image.FromFile(@"assets\\jc.png");
+            scale = 0.5f;
+            logoWidth = (int)(imgLogo.Width * scale);
+            logoHeight = (int)(imgLogo.Height * scale);
+            destRect = new Rectangle(offsetX + colX[colX.Length - 1]-200, yFinal + 250, logoWidth, logoHeight);
+            g.DrawImage(imgLogo, destRect);
+
+            
+
+        }
 
         private void DibujarIntro(Graphics g)
         {

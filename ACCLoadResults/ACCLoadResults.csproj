@@ -66,6 +66,9 @@
     <None Update="Assets\GainPos.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Assets\JC.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\LessPos.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -76,6 +79,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Assets\StartingGrid.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\tulsa.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="DB\ACCSessionsData.mdf">

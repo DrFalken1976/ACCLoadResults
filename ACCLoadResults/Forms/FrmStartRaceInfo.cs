@@ -1,6 +1,7 @@
 ﻿using ACCLoadResults.Classes;
 using ACCLoadResults.Models;
 using NetCoreAudio;
+using System.Drawing.Printing;
 using Timer = System.Windows.Forms.Timer;
 
 namespace ACCLoadResults.Forms
@@ -21,8 +22,13 @@ namespace ACCLoadResults.Forms
         private float scrollStep = 20f;
         private int delaySeconds = 4;
         private bool mostrarIntro = true;
+        private bool mostrarPatrocinadores = true;
+        private bool MostrarFilaActual = false;
 
         private Player player;
+
+        private Timer timerChangePartnerImage;
+        private int TicksParnersTimer = 0;
 
         public FrmStartRaceInfo()
         {
@@ -52,16 +58,55 @@ namespace ACCLoadResults.Forms
             {
                 introTimer.Stop();
                 mostrarIntro = false;
-                Invalidate(); // Redibuja para mostrar la parrilla
-                PrepararAnimacion();
+                Invalidate(); // Redibuja para mostrar la parrilla                
             };
             introTimer.Start();
+
+
+            Timer PatroTimer = new Timer();
+            PatroTimer.Interval = 5000; // 5 segundos
+
+            timerChangePartnerImage = new Timer();
+            timerChangePartnerImage.Interval = 5000; // 5 segundos
+            timerChangePartnerImage.Tick += timerChangePartnerImage_Tick;
+            timerChangePartnerImage.Start();
 
             this.DoubleBuffered = true;
             CargarPilotos();
             CargarFuenteF1();
             CalcularTamañoPiloto();            
 
+        }
+
+        private void timerChangePartnerImage_Tick(object? sender, EventArgs e)
+        {
+            TicksParnersTimer += 1;
+
+            if (TicksParnersTimer > 2)
+            {
+                mostrarPatrocinadores = false;
+                timerChangePartnerImage.Stop();
+                PrepararAnimacion();
+            }
+
+            //if (ParterShowFirstImage == true && ParterShowSecondImage == false && MostrarFilaActual == false)
+            //{ 
+            //    ParterShowFirstImage = true;
+            //    ParterShowSecondImage = true;
+            //}
+            //else if (ParterShowFirstImage == false && MostrarFilaActual == false)
+            //{
+
+            //    ParterShowFirstImage = false;
+            //    ParterShowSecondImage = false;
+
+            //    MostrarFilaActual = true;                
+            //}
+            //else
+            //{
+            //}
+
+            this.Invalidate();
         }
 
         private void FrmStartRaceInfo_FormClosing(object sender, FormClosingEventArgs e)
@@ -78,7 +123,7 @@ namespace ACCLoadResults.Forms
 
         private void CalcularTamañoPiloto()
         {
-            pilotoHeight = this.ClientSize.Height + 220;
+            pilotoHeight = this.ClientSize.Height + 250; //220;
             pilotoWidth = this.ClientSize.Width / 2 - 90;
         }
 
@@ -127,7 +172,11 @@ namespace ACCLoadResults.Forms
 
             if (mostrarIntro)
                 DibujarIntro(e.Graphics);
-            else
+            else if (TicksParnersTimer < 3)
+            {                
+                DibujarPatrocinadores(e.Graphics);
+            }
+            else 
                 DibujarFilaActual(e.Graphics);
 
         }
@@ -135,6 +184,9 @@ namespace ACCLoadResults.Forms
 
         private void DibujarFilaActual(Graphics g)
         {
+
+            timerChangePartnerImage.Stop();            
+
             int totalRows = (int)Math.Ceiling(_oClassf.Count / 2.0);
 
             for (int row = 0; row < totalRows; row++)
@@ -154,7 +206,9 @@ namespace ACCLoadResults.Forms
 
                     vGetQualyResult p = _oClassf[i + j];
 
-                    g.DrawString(p.Position.ToString(), f1FontPos, Brushes.Gold, x, (int)y + 20);
+                    Font f1FontPlus = new Font(f1FontPos.FontFamily, f1FontPos.Size + 4, f1FontPos.Style);
+                    g.DrawString(p.Position.ToString(), f1FontPlus, Brushes.Orange, x, (int)y + 20);
+                    g.DrawString(p.Position.ToString(), f1FontPos, Brushes.Yellow, x-4, (int)y + 24);
 
                     if (p.Photo != null)
                     { 
@@ -192,9 +246,13 @@ namespace ACCLoadResults.Forms
                     // Dibuja el valor en otro color (por ejemplo, rojo)
                     g.DrawString(valor, f1Font, Brushes.White, baseX + sizeTexto.Width, baseY);
 
-                    //g.DrawString($"Championship possition: {p.GeneralPos}º", f1Font, Brushes.LightBlue, x, textY + 60);
+                    g.DrawString($"Car Model: {p.CarModel}", f1Font, Brushes.Gold, x, baseY + 30);
+
+                    baseY += 300;
+
                 }
-            }
+            }            
+
         }
 
         private void DibujarIntro(Graphics g)
@@ -230,8 +288,56 @@ namespace ACCLoadResults.Forms
             // Subtítulo
             centery += sizeCircuito.Height + 20;
             g.DrawString(subtitulo, fontSubtitulo, Brushes.Yellow, centerX - sizeSubtitulo.Width / 2, centery);
+
+
         }
 
+        private void DibujarPatrocinadores(Graphics g)
+        {
+
+            string titulo = "Partners";
+
+            Font fontTitulo = new Font("Formula1 Display-Regular", 60, FontStyle.Bold);
+
+            SizeF sizeTitulo = g.MeasureString(titulo, fontTitulo);
+
+            int centerX = this.ClientSize.Width / 2;
+            float centery = 200;
+
+            float y = 80;
+
+            // Título principal
+            g.DrawString(titulo, fontTitulo, Brushes.White, centerX - sizeTitulo.Width / 2, centery);
+
+            // Línea roja debajo del título
+            centery += sizeTitulo.Height + 10;
+            g.FillRectangle(Brushes.Red, centerX - sizeTitulo.Width / 2, centery, sizeTitulo.Width, 5);
+
+            Image imgLogo;
+            float scale;
+            int logoWidth;
+            int logoHeight;
+            Rectangle destRect;
+
+            string pathImagen = string.Empty;
+
+            if (TicksParnersTimer == 1)
+                pathImagen = @"assets\\Tulsa.png";
+
+            if (TicksParnersTimer == 2)
+                pathImagen = @"assets\\JC.png";
+            
+            imgLogo = Image.FromFile(pathImagen);
+            scale = 0.5f;
+            int x = (int)(centerX - (sizeTitulo.Width / 2));
+            logoWidth = (int)(imgLogo.Width);
+            logoHeight = (int)(imgLogo.Height);
+            destRect = new Rectangle(x-75, (int)centery + 200, logoWidth, logoHeight);
+            g.DrawImage(imgLogo, destRect);
+                
+            //if (ParterShowFirstImage == false)
+            //    MostrarFilaActual = true;
+        }
 
     }
 
