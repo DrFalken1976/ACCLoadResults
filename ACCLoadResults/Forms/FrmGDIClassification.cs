@@ -190,19 +190,28 @@ namespace ACCLoadResults.Forms
                     if (j == 4 || j == 5) // GainPos / GainPoints
                     {
                         int val = Convert.ToInt32(data[i][j]);
+
+                        string valNorm = val.ToString();
+
+                        if (val < 0)
+                            valNorm = Math.Abs(val).ToString();
+
+                        if (valNorm.Length == 1)
+                            valNorm = " " + valNorm;
+
                         if (val > 0)
                         {
                             brush = Brushes.LimeGreen;
-                            text = $"{val} ▲";
+                            text = $"{valNorm} ▲";
                         }
                         else if (val < 0)
                         {
                             brush = Brushes.Red;
-                            text = $"{Math.Abs(val)} ▼";
+                            text = $"{valNorm} ▼";
                         }
                         else
                         {
-                            text = "0";
+                            text = " 0";
                         }
                     }
 
