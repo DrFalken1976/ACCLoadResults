@@ -30,6 +30,16 @@ namespace ACCLoadResults.Forms
         public FrmGDIClassification()
         {
 
+            //Get LeaderBoard
+            _oClassf = (from Data in Globals.oData.vGetGDIClassification
+                        orderby Data.Posicio ascending
+                        select Data).ToList();
+
+            if (!_oClassf.Any())
+            {
+                return;
+            }
+
             //Play Music
             player = new Player();
 
@@ -43,10 +53,6 @@ namespace ACCLoadResults.Forms
             {
             }
 
-            //Get LeaderBoard
-            _oClassf = (from Data in Globals.oData.vGetGDIClassification
-                        orderby Data.Posicio ascending
-                        select Data).ToList();
 
             InitializeComponent();
 
@@ -155,7 +161,7 @@ namespace ACCLoadResults.Forms
 
             SizeF LastColSize = g.MeasureString("G.Points", f1Font);
             float FinalLine = (offsetX + colX[colX.Length - 1]) + LastColSize.Width + 10;
-            g.DrawLine(new Pen(Color.White, 1.5f), offsetX, headerY+35, FinalLine, headerY+35);
+            g.DrawLine(new Pen(Color.White, 1.5f), offsetX, headerY + 35, FinalLine, headerY + 35);
 
 
 
@@ -226,22 +232,28 @@ namespace ACCLoadResults.Forms
             scale = 0.5f;
             logoWidth = (int)(imgLogo.Width * scale);
             logoHeight = (int)(imgLogo.Height * scale);
-            destRect = new Rectangle(offsetX + margin, yFinal+200, logoWidth, logoHeight);
+            destRect = new Rectangle(offsetX + margin, yFinal + 200, logoWidth, logoHeight);
             g.DrawImage(imgLogo, destRect);
 
             imgLogo = Image.FromFile(@"assets\\jc.png");
             scale = 0.5f;
             logoWidth = (int)(imgLogo.Width * scale);
             logoHeight = (int)(imgLogo.Height * scale);
-            destRect = new Rectangle(offsetX + colX[colX.Length - 1]-200, yFinal + 250, logoWidth, logoHeight);
+            destRect = new Rectangle(offsetX + colX[colX.Length - 1] - 200, yFinal + 250, logoWidth, logoHeight);
             g.DrawImage(imgLogo, destRect);
 
-            
+
 
         }
 
         private void DibujarIntro(Graphics g)
         {
+
+            if (!_oClassf.Any())
+            {
+                return;
+            }
+
             string titulo = "FalkenCUP";
             string circuito = _oClassf[0].IdTemporada.Trim();
             string subtitulo = "General Classification";

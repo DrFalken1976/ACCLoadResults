@@ -33,6 +33,16 @@ namespace ACCLoadResults.Forms
         public FrmStartRaceInfo()
         {
 
+            //Get LeaderBoard
+            _oClassf = (from Data in Globals.oData.vGetQualyResult                                                
+                        orderby Data.Position ascending
+                        select Data).ToList();
+
+            if (!_oClassf.Any())
+            { 
+                return;
+            }
+
             //Play Music
             player = new Player();
 
@@ -45,10 +55,7 @@ namespace ACCLoadResults.Forms
             {
             }
 
-            //Get LeaderBoard
-            _oClassf = (from Data in Globals.oData.vGetQualyResult                                                
-                        orderby Data.Position ascending
-                        select Data).ToList();
+
 
             InitializeComponent();
 
@@ -257,6 +264,13 @@ namespace ACCLoadResults.Forms
 
         private void DibujarIntro(Graphics g)
         {
+
+            if (!_oClassf.Any())
+            {
+                return;
+            }
+
+
             string titulo = "FalkenCUP";
             string circuito = _oClassf[0].trackName.Trim();
             string subtitulo = "Qualify results";
