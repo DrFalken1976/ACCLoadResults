@@ -11,6 +11,8 @@ public partial class vGetQualyResult
 
     public string CarModel { get; set; }
 
+    public string lastName { get; set; }
+
     public string Driver { get; set; }
 
     public string BestLap { get; set; }

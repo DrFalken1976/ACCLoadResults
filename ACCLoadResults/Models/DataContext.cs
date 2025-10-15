@@ -55,6 +55,10 @@ public partial class DataContext : DbContext
 
     public virtual DbSet<vGetCompleteSessions> vGetCompleteSessions { get; set; }
 
+    public virtual DbSet<vGetCountRacesCurSeasson> vGetCountRacesCurSeasson { get; set; }
+
+    public virtual DbSet<vGetGDIClassification> vGetGDIClassification { get; set; }
+
     public virtual DbSet<vGetQualyResult> vGetQualyResult { get; set; }
 
     public virtual DbSet<vGetRaceCSVFile> vGetRaceCSVFile { get; set; }
@@ -68,9 +72,6 @@ public partial class DataContext : DbContext
     public virtual DbSet<vSessionPenalties> vSessionPenalties { get; set; }
 
     public virtual DbSet<vStatsRaceVsQualy> vStatsRaceVsQualy { get; set; }
-
-    public virtual DbSet<vGetGDIClassification> vGetGDIClassification { get; set; }
-    
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -258,6 +259,7 @@ public partial class DataContext : DbContext
                 .HasMaxLength(100)
                 .IsFixedLength();
             entity.Property(e => e.MitjaPuntsPerCursa).HasColumnType("numeric(6, 2)");
+            entity.Property(e => e.RaceOrder).HasAnnotation("Relational:DefaultConstraintName", "DF_SeasonsLeaderBoardHistory_RaceOrder");
         });
 
         modelBuilder.Entity<Sessions>(entity =>
@@ -389,20 +391,6 @@ public partial class DataContext : DbContext
             entity.Property(e => e.MitjaPuntsPerCursa).HasColumnType("decimal(16, 13)");
         });
 
-        modelBuilder.Entity<vGetGDIClassification>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("vGetGDIClassification");
-
-            /*entity.Property(e => e.IdTemporada).HasMaxLength(100);
-            entity.Property(e => e.Posicio).HasColumnType("int");
-            entity.Property(e => e.GameTag).HasMaxLength(50);
-            entity.Property(e => e.IdSeason).HasColumnType("numeric(18, 0)");
-            
-            entity.Property(e => e.MitjaPuntsPerCursa).HasColumnType("decimal(16, 13)");*/
-        });
-
         modelBuilder.Entity<vGetCompleteSessions>(entity =>
         {
             entity
@@ -448,27 +436,46 @@ public partial class DataContext : DbContext
                 .HasMaxLength(150);
         });
 
+        modelBuilder.Entity<vGetCountRacesCurSeasson>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("vGetCountRacesCurSeasson");
+        });
+
+        modelBuilder.Entity<vGetGDIClassification>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("vGetGDIClassification");
+
+            entity.Property(e => e.GameTag)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.IdTemporada)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsFixedLength();
+        });
+
         modelBuilder.Entity<vGetQualyResult>(entity =>
         {
             entity
                 .HasNoKey()
                 .ToView("vGetQualyResult");
 
-            entity.Property(e => e.BestLap)
-                .HasMaxLength(20)
-                .IsFixedLength();
+            entity.Property(e => e.BestLap).HasMaxLength(20);
             entity.Property(e => e.CarModel)
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsFixedLength();
-            entity.Property(e => e.Driver)
+            entity.Property(e => e.Driver).HasMaxLength(50);
+            entity.Property(e => e.Photo).HasColumnType("image");
+            entity.Property(e => e.lastName)
                 .IsRequired()
                 .HasMaxLength(50)
                 .IsFixedLength();
-            entity.Property(e => e.Photo).HasColumnType("image");
-            entity.Property(e => e.trackName)
-                .IsRequired()
-                .HasMaxLength(150);
+            entity.Property(e => e.trackName).HasMaxLength(150);
         });
 
         modelBuilder.Entity<vGetRaceCSVFile>(entity =>

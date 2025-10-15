@@ -31,5 +31,5 @@ public partial class vGetClassification
 
     public int DiffLider { get; set; }
 
-    public decimal? MitjaPuntsPerCursa { get; set; }
+    public decimal MitjaPuntsPerCursa { get; set; }
 }

@@ -18,6 +18,8 @@ namespace ACCLoadResults.Forms
         private Font f1FontPos;
 
         List<vGetGDIClassification> _oClassf;
+        List<vGetCountRacesCurSeasson> _CurrentRaces;
+        
 
         private int pilotoWidth;
         private int pilotoHeight;
@@ -36,6 +38,14 @@ namespace ACCLoadResults.Forms
                         select Data).ToList();
 
             if (!_oClassf.Any())
+            {
+                return;
+            }
+
+
+            _CurrentRaces = (from Data in Globals.oData.vGetCountRacesCurSeasson select Data).ToList();
+
+            if (!_CurrentRaces.Any())
             {
                 return;
             }
@@ -139,11 +149,20 @@ namespace ACCLoadResults.Forms
             g.DrawImage(imgLogo, destRect);
 
             // Título de la temporada centrado
-            string seasonTitle = _oClassf[0].IdTemporada.Trim();
+            string seasonTitle = _oClassf.First().IdTemporada.Trim();
             SizeF titleSize = g.MeasureString(seasonTitle, f1FontPos);
             float titleX = offsetX + (width - titleSize.Width) / 2;
             float titleY = margin + (logoSize - titleSize.Height) / 2;
             g.DrawString(seasonTitle, f1FontPos, Brushes.Gold, titleX, titleY);
+
+
+            // NumCarreras
+            string RacesTitle = $"Races: {_CurrentRaces.First().CurrentRaces} / {_CurrentRaces.First().TotalRaces}";
+            SizeF RacesSize = g.MeasureString(RacesTitle, f1FontPos);
+            float RacesX = ((offsetX + 1600) + (width - RacesSize.Width)) / 2;
+            float RacesY = margin + (logoSize - RacesSize.Height) / 2;
+            g.DrawString(RacesTitle, f1FontPos, Brushes.Gold, RacesX, RacesY);
+
 
             // Línea roja debajo del título
             int lineY = margin + logoSize + 10;
