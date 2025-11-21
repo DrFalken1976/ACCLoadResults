@@ -34,14 +34,28 @@ namespace ACCLoadResults
                 //Get Files Imported in DB
                 //Get Only not exist in DB
 
-                var DifFiles = from c in conn.GetListing()
-                               where !(from Datos in Classes.Globals.oData.Sessions select Datos.LogFileName.ToUpper().Trim()).Contains(c.Name.ToUpper().Trim()) &&
-                                     (c.Name.Contains("_R") || c.Name.Contains("_Q")) &&
-                                     (c.Modified >= calDate.Value && c.Modified <= calDate.Value.AddDays(1).AddHours(4))
-                               orderby c.Modified descending
-                               select new { c.Name, c.Modified };
+                if (chkPracticeData.Checked ==false)
+                { 
+                    var DifFiles = from c in conn.GetListing()
+                                   where !(from Datos in Classes.Globals.oData.Sessions select Datos.LogFileName.ToUpper().Trim()).Contains(c.Name.ToUpper().Trim()) &&
+                                         (c.Name.Contains("_R") || c.Name.Contains("_Q")) &&
+                                         (c.Modified >= calDate.Value && c.Modified <= calDate.Value.AddDays(1).AddHours(4))
+                                   orderby c.Modified descending
+                                   select new { c.Name, c.Modified };
                 
-                grdAvFiles.DataSource = DifFiles.ToArray();
+                    grdAvFiles.DataSource = DifFiles.ToArray();
+                }
+                else
+                {
+                    var DifFiles = from c in conn.GetListing()
+                                   where !(from Datos in Classes.Globals.oData.Sessions select Datos.LogFileName.ToUpper().Trim()).Contains(c.Name.ToUpper().Trim()) &&                                         
+                                         (!c.Name.Contains("entry")) &&
+                                         (c.Modified >= calDate.Value)
+                                   orderby c.Modified descending
+                                   select new { c.Name, c.Modified };
+
+                    grdAvFiles.DataSource = DifFiles.ToArray();
+                }
 
                 grdAvFiles.Columns[0].Width = 300;
 
@@ -101,7 +115,13 @@ namespace ACCLoadResults
                 foreach (var file in DifFiles)
                 {
 
-                    string JsonFile = AppPath + @"DownloadFiles\" + file.Name;
+                    string JsonFile = string.Empty;
+
+
+                    if (chkPracticeData.Checked == false)
+                        JsonFile = AppPath + @"DownloadFiles\" + file.Name;
+                    else
+                        JsonFile = AppPath + @"DownloadFilesPractice\" + file.Name;
 
                     //DownLoad File from G-PORTAL
                     FtpStatus rStatus = conn.DownloadFile(JsonFile, file.Name, FtpLocalExists.Overwrite);
@@ -158,6 +178,9 @@ namespace ACCLoadResults
                         oSessions.BestSector2Numeric = oResultsInfo.sessionResult.bestSplits[1];
                         oSessions.BestSector3Numeric = oResultsInfo.sessionResult.bestSplits[2];
 
+                        if (chkPracticeData.Checked == true)
+                            oSessions.IsTestSession = true;
+
                         Globals.oData.Sessions.Add(oSessions);
                         Globals.oData.SaveChanges();
 
@@ -211,6 +234,9 @@ namespace ACCLoadResults
                             oLeaderBoard.missingMandatoryPitstop = Data.missingMandatoryPitstop;
                             oLeaderBoard.Position = position;
 
+                            if (chkPracticeData.Checked == true)
+                                oLeaderBoard.IsTestSession = true;
+
                             Globals.oData.LeaderBoard.Add(oLeaderBoard);
                             position++;
 
@@ -248,6 +274,9 @@ namespace ACCLoadResults
                                 oLap.Sector3Numeric = Data.splits[2];
 
                             }
+
+                            if (chkPracticeData.Checked == true)
+                                oLap.IsTestSession = true;
 
                             Globals.oData.Laps.Add(oLap);
                             Globals.oData.SaveChanges();

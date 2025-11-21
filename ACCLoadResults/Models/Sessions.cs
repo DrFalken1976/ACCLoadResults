@@ -38,4 +38,5 @@ public partial class Sessions
     public decimal BestSector2Numeric { get; set; }
 
     public decimal BestSector3Numeric { get; set; }
+    public bool IsTestSession { get; set; }
 }

@@ -64,4 +64,6 @@ public partial class LeaderBoard
     public decimal? LastSector2Numeric { get; set; }
 
     public decimal? LastSector3Numeric { get; set; }
+
+    public bool IsTestSession { get; set; }
 }

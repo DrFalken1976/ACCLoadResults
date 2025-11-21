@@ -40,6 +40,7 @@
             grdAvFiles = new DataGridView();
             label4 = new Label();
             calDate = new DateTimePicker();
+            chkPracticeData = new CheckBox();
             gbStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grdAvFiles).BeginInit();
             SuspendLayout();
@@ -79,7 +80,7 @@
             // lblTotalKO
             // 
             lblTotalKO.AutoSize = true;
-            lblTotalKO.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalKO.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblTotalKO.ForeColor = Color.Red;
             lblTotalKO.Location = new Point(173, 86);
             lblTotalKO.Name = "lblTotalKO";
@@ -90,7 +91,7 @@
             // lblTotalOK
             // 
             lblTotalOK.AutoSize = true;
-            lblTotalOK.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalOK.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblTotalOK.ForeColor = Color.ForestGreen;
             lblTotalOK.Location = new Point(173, 60);
             lblTotalOK.Name = "lblTotalOK";
@@ -101,7 +102,7 @@
             // lblTotalFiles
             // 
             lblTotalFiles.AutoSize = true;
-            lblTotalFiles.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalFiles.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblTotalFiles.Location = new Point(173, 35);
             lblTotalFiles.Name = "lblTotalFiles";
             lblTotalFiles.Size = new Size(14, 15);
@@ -111,7 +112,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label3.Location = new Point(20, 86);
             label3.Name = "label3";
             label3.Size = new Size(98, 15);
@@ -121,7 +122,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label2.Location = new Point(20, 60);
             label2.Name = "label2";
             label2.Size = new Size(137, 15);
@@ -131,7 +132,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label1.Location = new Point(20, 35);
             label1.Name = "label1";
             label1.Size = new Size(66, 15);
@@ -143,7 +144,6 @@
             grdAvFiles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             grdAvFiles.Location = new Point(41, 27);
             grdAvFiles.Name = "grdAvFiles";
-            grdAvFiles.RowTemplate.Height = 25;
             grdAvFiles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grdAvFiles.Size = new Size(592, 227);
             grdAvFiles.TabIndex = 3;
@@ -166,11 +166,22 @@
             calDate.TabIndex = 5;
             calDate.ValueChanged += calDate_ValueChanged;
             // 
+            // chkPracticeData
+            // 
+            chkPracticeData.AutoSize = true;
+            chkPracticeData.Location = new Point(483, 262);
+            chkPracticeData.Name = "chkPracticeData";
+            chkPracticeData.Size = new Size(150, 19);
+            chkPracticeData.TabIndex = 6;
+            chkPracticeData.Text = "Load only practice Data";
+            chkPracticeData.UseVisualStyleBackColor = true;
+            // 
             // frmLoadData
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(674, 522);
+            Controls.Add(chkPracticeData);
             Controls.Add(calDate);
             Controls.Add(label4);
             Controls.Add(grdAvFiles);
@@ -207,5 +218,6 @@
         private Label label4;
         private DateTimePicker calDate;
         private CheckBox chkIntroData;
+        private CheckBox chkPracticeData;
     }
 }

@@ -87,6 +87,9 @@
     <None Update="DB\ACCSessionsData.mdf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Update="DownloadFilesPractice\ReadME.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DownloadFiles\ReadME.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
