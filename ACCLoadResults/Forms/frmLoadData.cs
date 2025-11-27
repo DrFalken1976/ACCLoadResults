@@ -179,7 +179,11 @@ namespace ACCLoadResults
                         oSessions.BestSector3Numeric = oResultsInfo.sessionResult.bestSplits[2];
 
                         if (chkPracticeData.Checked == true)
+                        {
+                            Seasons Sel = (from Data in Classes.Globals.oData.Seasons where oSessions.SessionDate >= Data.DateStart && oSessions.SessionDate <= Data.DateEnd select Data).First();
                             oSessions.IsTestSession = true;
+                            oSessions.IdSeasonForPractice = Sel.ID; 
+                        }
 
                         Globals.oData.Sessions.Add(oSessions);
                         Globals.oData.SaveChanges();
@@ -235,7 +239,10 @@ namespace ACCLoadResults
                             oLeaderBoard.Position = position;
 
                             if (chkPracticeData.Checked == true)
+                            {
                                 oLeaderBoard.IsTestSession = true;
+                                oLeaderBoard.IdSeasonForPractice = oSessions.IdSeasonForPractice;
+                            }
 
                             Globals.oData.LeaderBoard.Add(oLeaderBoard);
                             position++;
@@ -276,7 +283,10 @@ namespace ACCLoadResults
                             }
 
                             if (chkPracticeData.Checked == true)
+                            { 
                                 oLap.IsTestSession = true;
+                                oLap.IdSeasonForPractice = oSessions.IdSeasonForPractice;
+                            }
 
                             Globals.oData.Laps.Add(oLap);
                             Globals.oData.SaveChanges();

@@ -36,4 +36,6 @@ public partial class Laps
     public decimal Sector3Numeric { get; set; }
 
     public bool IsTestSession { get; set; }
+
+    public decimal IdSeasonForPractice { get; set; }
 }

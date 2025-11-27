@@ -22,7 +22,7 @@ namespace ACCLoadResults.Forms
 
             //Load Races without Quali's
             List<Sessions> oSessions = (from Datos in Classes.Globals.oData.Sessions
-                                        where Datos.sessionType.Contains("R") && Datos.IDQualySession == null
+                                        where Datos.sessionType.Contains("R") && Datos.IDQualySession == null && Datos.IsTestSession == false
                                         orderby Datos.SessionDate descending, Datos.SessionHour descending
                                         select Datos).ToList();
 
@@ -30,7 +30,7 @@ namespace ACCLoadResults.Forms
 
             //Load Qualis without Race
             List<Sessions> oQuali = (from Datos in Classes.Globals.oData.Sessions
-                                     where Datos.sessionType.Contains("Q") &&
+                                     where Datos.IsTestSession == false && Datos.sessionType.Contains("Q") &&
                                            !(
                                              from DatosR in Classes.Globals.oData.Sessions
                                              where DatosR.sessionType.Contains("R")
