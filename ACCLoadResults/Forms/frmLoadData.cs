@@ -115,6 +115,12 @@ namespace ACCLoadResults
                 foreach (var file in DifFiles)
                 {
 
+                    //Verify if file exists in DataBase in this case don't process
+                    bool SessionExists = (from Data in Globals.oData.Sessions where Data.LogFileName.Trim() == file.Name.Trim() select Data).Any();
+
+                    if (SessionExists)
+                        continue;
+
                     string JsonFile = string.Empty;
 
 
@@ -180,9 +186,16 @@ namespace ACCLoadResults
 
                         if (chkPracticeData.Checked == true)
                         {
-                            Seasons Sel = (from Data in Classes.Globals.oData.Seasons where oSessions.SessionDate >= Data.DateStart && oSessions.SessionDate <= Data.DateEnd select Data).First();
-                            oSessions.IsTestSession = true;
-                            oSessions.IdSeasonForPractice = Sel.ID; 
+                            List<Seasons> Sel = (from Data in Classes.Globals.oData.Seasons where oSessions.SessionDate >= Data.DateStart.AddDays(-20) && oSessions.SessionDate <= Data.DateEnd select Data).ToList();
+
+                            if (Sel.Count != 0)
+                            {
+                                oSessions.IsTestSession = true;
+                                oSessions.IdSeasonForPractice = Sel.First().ID; 
+                            }
+                            else //Skip session is out of season
+                                continue;
+
                         }
 
                         Globals.oData.Sessions.Add(oSessions);
